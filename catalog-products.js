@@ -57,6 +57,43 @@ window.showCatalogImage = (url, alt) => {
   dialog.showModal();
 };
 
+window.showContactOptions = (product) => {
+  const dialog = document.querySelector("#contact-options-dialog");
+  if (!(dialog instanceof HTMLDialogElement)) {
+    throw new Error("ไม่พบหน้าต่างช่องทางติดต่อ");
+  }
+
+  const productMessage = dialog.querySelector(".contact-dialog-product");
+  const lineLink = dialog.querySelector("[data-line-contact]");
+  if (productMessage && lineLink) {
+    if (product) {
+      productMessage.textContent = `สอบถามสินค้า: ${product.title}`;
+      const message = `สนใจสินค้า: ${product.title}\nรูปสินค้า: ${product.image}`;
+      lineLink.href = `https://line.me/R/oaMessage/%40634lfegy/?${encodeURIComponent(message)}`;
+    } else {
+      productMessage.textContent = "เลือกช่องทางที่สะดวกเพื่อติดต่อร้าน";
+      lineLink.href = "https://line.me/R/ti/p/%40634lfegy";
+    }
+  }
+
+  if (!dialog.dataset.contactInitialized) {
+    dialog.querySelector("[data-contact-close]")?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.dataset.contactInitialized = "true";
+  }
+
+  if (!dialog.open) dialog.showModal();
+};
+
+document.addEventListener("click", (event) => {
+  const trigger = event.target.closest("[data-contact-options]");
+  if (!trigger) return;
+  event.preventDefault();
+  window.showContactOptions();
+});
+
 window.carryProductToContact = async (card, contact) => {
   if (forestCaptureInProgress) return;
   if (!(card instanceof HTMLElement) || !(contact instanceof HTMLElement)) {
@@ -130,16 +167,13 @@ window.contactProductOnLine = async (card, contact, product) => {
   }
   if (forestCaptureInProgress) return;
 
-  const lineMessage = `สนใจสินค้า: ${product.title}\nรูปสินค้า: ${product.image}`;
-  const lineUrl = `https://line.me/R/oaMessage/%40634lfegy/?${encodeURIComponent(lineMessage)}`;
-
   try {
     await window.carryProductToContact(card, contact);
     await new Promise((resolve) => window.setTimeout(resolve, 900));
-    window.location.assign(lineUrl);
+    window.showContactOptions(product);
   } catch (error) {
-    console.error("เปิดแชต LINE เพื่อสอบถามสินค้าไม่สำเร็จ", error);
-    window.alert("เปิดแชต LINE ไม่สำเร็จ กรุณาลองกดสอบถามสินค้าอีกครั้ง");
+    console.error("เปิดช่องทางติดต่อเพื่อสอบถามสินค้าไม่สำเร็จ", error);
+    window.alert("เปิดช่องทางติดต่อไม่สำเร็จ กรุณาลองกดสอบถามสินค้าอีกครั้ง");
   }
 };
 
