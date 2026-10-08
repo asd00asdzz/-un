@@ -90,7 +90,7 @@
     .catalog-gallery-link:nth-child(10) { right: 5%; bottom: 6%; --drift-x: -14px; --drift-y: -12px; animation-delay: -4.6s; }
     .catalog-gallery-link:hover, .catalog-gallery-link:focus-visible { z-index: 10; opacity: 1; scale: 1.14; box-shadow: 0 12px 32px rgba(0,0,0,.55), 0 0 26px rgba(213,31,53,.5); animation-name: catalog-image-drift, catalog-frame-pop; animation-duration: 5.8s, .62s; animation-timing-function: ease-in-out, ease-out; animation-iteration-count: infinite, 1; animation-fill-mode: none, forwards; }
     .catalog-gallery-link.is-popping { animation-name: catalog-image-drift, catalog-frame-pop; animation-duration: 5.8s, .62s; animation-timing-function: ease-in-out, ease-out; animation-iteration-count: infinite, 1; }
-    .catalog-gallery-image, .catalog-gallery-video { display: block; width: 100%; height: 100%; border: 0; border-radius: 11px; object-fit: cover; filter: drop-shadow(0 8px 8px rgba(0,0,0,.4)); }
+    .catalog-gallery-image, .catalog-gallery-video { display: block; width: 100%; height: 100%; border-radius: 11px; object-fit: cover; filter: drop-shadow(0 8px 8px rgba(0,0,0,.4)); }
     .catalog-gallery-placeholder { display: grid; place-items: center; color: rgba(255,255,255,.75); font-size: 11px; text-align: center; text-shadow: 0 2px 6px #000; }
     @keyframes catalog-image-drift { 0%, 100% { translate: 0 0; rotate: -2deg; } 50% { translate: var(--drift-x) var(--drift-y); rotate: 2deg; } }
     @keyframes catalog-frame-pop { 0% { scale: 1; } 42% { scale: 1.24; } 72% { scale: .96; } 100% { scale: 1.08; } }
@@ -153,14 +153,17 @@
     .catalog-image-dialog::backdrop { background: rgba(8,17,18,.78); backdrop-filter: blur(5px); }
     .catalog-image-dialog-photo { display: block; width: 100%; height: min(76vh, 760px); object-fit: contain; border-radius: 12px; }
     .catalog-image-dialog-close { position: absolute; top: 8px; right: 10px; display: grid; width: 38px; height: 38px; place-items: center; border: 0; border-radius: 50%; background: #d51f35; color: white; font-size: 28px; line-height: 1; cursor: pointer; }
-    .contact-dialog { position: fixed; inset: 0; width: min(94vw, 650px); max-width: none; max-height: min(90vh, 820px); margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.28); border-radius: 28px; background: #10252b; color: #fff; box-shadow: 0 28px 100px rgba(0,0,0,.55); }
+    .contact-dialog { position: fixed; inset: 0; width: min(94vw, 650px); max-width: none; max-height: min(90vh, 820px); margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.28); border-radius: 28px; background: #10252b; color: #fff; box-shadow: 0 28px 100px rgba(0,0,0,.55); animation: contact-dialog-pop .38s cubic-bezier(.2,.8,.25,1.25) both; }
     .contact-dialog::backdrop { background: rgba(5,15,19,.76); backdrop-filter: blur(7px); }
-    .contact-dialog-content { position: relative; max-height: min(90vh, 820px); padding: 30px; overflow: auto; isolation: isolate; background: radial-gradient(ellipse at 82% 0%, rgba(68,177,196,.3), transparent 38%), linear-gradient(145deg, #10252b, #153c42 60%, #0d242b); }
+    @keyframes contact-dialog-pop { from { opacity: 0; transform: translateY(26px) scale(.88); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .contact-dialog-content { position: relative; max-height: min(90vh, 820px); padding: 30px; overflow-x: hidden; overflow-y: auto; isolation: isolate; background: radial-gradient(ellipse at 82% 0%, rgba(68,177,196,.3), transparent 38%), linear-gradient(145deg, #10252b, #153c42 60%, #0d242b); }
     .contact-dialog-content::before, .contact-dialog-content::after { position: absolute; z-index: -1; width: 280px; height: 280px; border: 1px solid rgba(131,224,228,.18); border-radius: 50%; content: ""; pointer-events: none; }
     .contact-dialog-content::before { top: -160px; right: -65px; box-shadow: 0 0 0 28px rgba(131,224,228,.04), 0 0 0 58px rgba(131,224,228,.035); }
     .contact-dialog-content::after { bottom: -200px; left: -110px; }
-    .contact-dialog-fish { position: absolute; z-index: -1; top: 80px; right: 26px; color: rgba(160,237,236,.24); font-size: 66px; animation: contact-fish-swim 7s ease-in-out infinite alternate; pointer-events: none; }
-    @keyframes contact-fish-swim { from { transform: translate(-16px, 8px) scaleX(1); } to { transform: translate(12px, -8px) scaleX(-1); } }
+    .contact-dialog-fish { position: absolute; z-index: -1; top: var(--fish-y, 34%); right: -70px; color: rgba(160,237,236,.24); font-size: var(--fish-size, 56px); opacity: 0; animation: contact-fish-swim var(--fish-duration, 10s) linear var(--fish-delay, 0s) infinite; pointer-events: none; }
+    .contact-dialog-fish--two { --fish-y: 61%; --fish-size: 38px; --fish-duration: 12s; --fish-delay: -5s; }
+    .contact-dialog-fish--three { --fish-y: 14%; --fish-size: 30px; --fish-duration: 9s; --fish-delay: -2.5s; }
+    @keyframes contact-fish-swim { 0% { transform: translate(20px, 0) scaleX(1); opacity: 0; } 12%, 78% { opacity: .75; } 50% { transform: translate(-300px, 12px) scaleX(1); } 100% { transform: translate(-680px, -16px) scaleX(-1); opacity: 0; } }
     .contact-dialog-heading { position: relative; padding-right: 42px; }
     .contact-dialog-heading small { color: #8de2df; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
     .contact-dialog-heading h2 { margin: 7px 0 5px; font-size: 28px; }
@@ -174,7 +177,7 @@
     .contact-option strong { font-size: 13px; }
     .contact-option small { margin-top: 2px; color: #c3d6d8; font-size: 12px; }
     .contact-dialog-product { min-height: 19px; margin: 17px 0 0; color: #b8d6d7; font-size: 12px; }
-    @media (prefers-reduced-motion: reduce) { .contact-dialog-fish { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .contact-dialog { animation: none; } .contact-dialog-fish { animation: none; } }
     @media (prefers-reduced-motion: reduce) { .forest-canopy, .forest-dart, .forest-fish, .catalog-swimmer, .catalog-water-fish::before { animation: none; } }
     .contact h2 { margin: 0 0 8px; font-size: 25px; }
     .contact p { margin: 0 0 18px; color: #ddd; font-size: 14px; }
@@ -357,15 +360,14 @@
         <section class="catalog-section" id="rat-spearguns">
           <div class="section-heading">
             <div><span class="kicker">หมวด 03</span><h2>หน้าไม้ยิงหนู</h2></div>
-            <p>สอบถามรายละเอียดและสินค้าที่มีในสต็อกกับทางร้าน</p>
+            <p>เลือกชมหน้าไม้ยิงหนูและสอบถามรายละเอียดกับทางร้าน</p>
           </div>
-          <p class="empty-category">กำลังเพิ่มรายการสินค้าในหมวดนี้ หากสนใจสอบถามร้านได้ทาง LINE</p>
           <div class="items" data-product-category="rat-spearguns"></div>
         </section>
         <section class="catalog-section" id="accessories">
           <div class="section-heading">
             <div><span class="kicker">หมวด 04</span><h2>อุปกรณ์เสริม</h2></div>
-            <p>เพิ่มรายการอุปกรณ์เสริมในหมวดนี้ได้ตามสินค้าจริงของร้าน</p>
+            <p>ลูกดอก ไก และอะไหล่สำหรับหน้าไม้ยิงหนู</p>
           </div>
           <div class="items" data-product-category="accessories"></div>
         </section>
@@ -387,6 +389,8 @@
   <dialog class="contact-dialog" id="contact-options-dialog" aria-labelledby="contact-dialog-title">
     <div class="contact-dialog-content">
       <span class="contact-dialog-fish" aria-hidden="true">🐟</span>
+      <span class="contact-dialog-fish contact-dialog-fish--two" aria-hidden="true">🐟</span>
+      <span class="contact-dialog-fish contact-dialog-fish--three" aria-hidden="true">🐟</span>
       <button class="contact-dialog-close" type="button" data-contact-close aria-label="ปิดหน้าต่าง">×</button>
       <div class="contact-dialog-heading">
         <small>RIM BUENG FISHING</small>
@@ -519,27 +523,16 @@
       link.rel = "noopener noreferrer";
       link.setAttribute("aria-label", `เปิด${media.alt}`);
 
-      const mediaUrl = new URL(media.src, document.baseURI);
-      if (["drive.google.com", "docs.google.com"].includes(mediaUrl.hostname)) {
-        const videoFrame = document.createElement("iframe");
-        videoFrame.className = "catalog-gallery-video";
-        videoFrame.src = window.catalogVideoUrl(media.src);
-        videoFrame.title = media.alt;
-        videoFrame.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture";
-        videoFrame.setAttribute("allowfullscreen", "");
-        link.append(videoFrame);
-      } else {
-        const video = document.createElement("video");
-        video.className = "catalog-gallery-video";
-        video.src = window.catalogVideoUrl(media.src);
-        video.muted = true;
-        video.loop = true;
-        video.autoplay = true;
-        video.playsInline = true;
-        video.preload = "metadata";
-        video.setAttribute("aria-label", media.alt);
-        link.append(video);
-      }
+      const video = document.createElement("video");
+      video.className = "catalog-gallery-video";
+      video.src = window.catalogVideoUrl(media.src);
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = "metadata";
+      video.setAttribute("aria-label", media.alt);
+      link.append(video);
       catalogGallery.append(link);
     });
 
