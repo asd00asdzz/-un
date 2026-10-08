@@ -130,69 +130,26 @@ window.contactProductOnLine = async (card, contact, product) => {
   }
   if (forestCaptureInProgress) return;
 
-  const lineUrl = "https://line.me/R/ti/p/%40634lfegy";
-
   try {
     await window.carryProductToContact(card, contact);
-    let dialog = document.querySelector("#line-product-contact-dialog");
-    if (!dialog) {
-      const style = document.createElement("style");
-      style.textContent = `
-        .line-product-contact-dialog { width: min(92vw, 440px); margin: auto; padding: 30px; border: 1px solid #e5e5e5; border-radius: 22px; background: #fff; color: #1b1b1b; box-shadow: 0 24px 80px rgba(0,0,0,.3); font-family: inherit; }
-        .line-product-contact-dialog::backdrop { background: rgba(15,15,15,.68); backdrop-filter: blur(4px); }
-        .line-product-contact-dialog h2 { margin: 0 36px 10px 0; font-size: 22px; }
-        .line-product-contact-dialog p { margin: 0 0 12px; color: #555; line-height: 1.7; }
-        .line-product-contact-message-text { display: block; width: 100%; min-height: 108px; margin: 0 0 20px; padding: 12px; resize: vertical; border: 1px solid #ddd; border-radius: 12px; background: #f7f7f7; color: #333; font: inherit; line-height: 1.55; }
-        .line-product-contact-actions { display: flex; align-items: center; gap: 12px; }
-        .line-product-contact-open { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; padding: 0 20px; border-radius: 999px; background: #06c755; color: #fff; font-weight: 800; text-decoration: none; }
-        .line-product-contact-close { display: inline-flex; min-height: 44px; align-items: center; padding: 0 16px; border: 1px solid #ddd; border-radius: 999px; background: #fff; color: #333; cursor: pointer; }
-        @media (max-width: 480px) { .line-product-contact-dialog { padding: 25px 20px; } }
-      `;
-      document.head.append(style);
-
-      dialog = document.createElement("dialog");
-      dialog.id = "line-product-contact-dialog";
-      dialog.className = "line-product-contact-dialog";
-      dialog.setAttribute("aria-labelledby", "line-product-contact-title");
-
-      const heading = document.createElement("h2");
-      heading.id = "line-product-contact-title";
-      heading.textContent = "เอฟเฟกต์สินค้าเสร็จแล้ว";
-      const message = document.createElement("p");
-      message.className = "line-product-contact-message";
-      message.textContent = "แตะปุ่มด้านล่างเพื่อเปิด LINE @634lfegy หากเป็นเพื่อนกับร้านแล้วจะเข้าห้องแชต หากยังไม่ได้เป็นเพื่อนให้กดเพิ่มเพื่อนก่อน";
-      const messageText = document.createElement("textarea");
-      messageText.className = "line-product-contact-message-text";
-      messageText.readOnly = true;
-      messageText.setAttribute("aria-label", "ข้อความและลิงก์รูปสินค้าสำหรับส่งใน LINE");
-      const actions = document.createElement("div");
-      actions.className = "line-product-contact-actions";
-      const openLink = document.createElement("a");
-      openLink.className = "line-product-contact-open";
-      openLink.textContent = "เปิดแชต LINE @634lfegy";
-      const closeButton = document.createElement("button");
-      closeButton.className = "line-product-contact-close";
-      closeButton.type = "button";
-      closeButton.textContent = "ปิด";
-      closeButton.addEventListener("click", () => dialog.close());
-
-      actions.append(openLink, closeButton);
-      dialog.append(heading, message, messageText, actions);
-      dialog.addEventListener("click", (event) => {
-        if (event.target === dialog) dialog.close();
-      });
-      document.body.append(dialog);
+    const configResponse = await fetch("/api/config", { headers: { Accept: "application/json" } });
+    if (!configResponse.ok) {
+      throw new Error("ยังไม่ได้ตั้งค่า LIFF บนเซิร์ฟเวอร์");
+    }
+    const { liffId } = await configResponse.json();
+    if (typeof liffId !== "string" || !/^\d{5,}-[A-Za-z0-9]+$/.test(liffId)) {
+      throw new Error("LIFF ID ไม่ถูกต้อง");
     }
 
-    dialog.querySelector(".line-product-contact-message-text").value =
-      `สนใจสินค้า: ${product.title}\nรูปสินค้า: ${product.image}`;
-    const openLink = dialog.querySelector(".line-product-contact-open");
-    openLink.href = lineUrl;
-    openLink.removeAttribute("target");
-    dialog.showModal();
+    const productState = new URLSearchParams({
+      title: product.title,
+      image: product.image
+    });
+    const liffState = `/line-send.html?${productState.toString()}`;
+    window.location.assign(`https://liff.line.me/${liffId}/?liff.state=${encodeURIComponent(liffState)}`);
   } catch (error) {
     console.error("เปิดแชต LINE เพื่อสอบถามสินค้าไม่สำเร็จ", error);
-    window.alert("เปิดแชต LINE ไม่สำเร็จ กรุณาลองกดสอบถามอีกครั้ง");
+    window.alert("ยังส่งรูปเข้า LINE อัตโนมัติไม่ได้ กรุณาตรวจการตั้งค่า LIFF และ LINE Messaging API บน Vercel");
   }
 };
 
