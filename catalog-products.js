@@ -130,26 +130,16 @@ window.contactProductOnLine = async (card, contact, product) => {
   }
   if (forestCaptureInProgress) return;
 
+  const lineMessage = `สนใจสินค้า: ${product.title}\nรูปสินค้า: ${product.image}`;
+  const lineUrl = `https://line.me/R/oaMessage/%40634lfegy/?${encodeURIComponent(lineMessage)}`;
+
   try {
     await window.carryProductToContact(card, contact);
-    const configResponse = await fetch("/api/config", { headers: { Accept: "application/json" } });
-    if (!configResponse.ok) {
-      throw new Error("ยังไม่ได้ตั้งค่า LIFF บนเซิร์ฟเวอร์");
-    }
-    const { liffId } = await configResponse.json();
-    if (typeof liffId !== "string" || !/^\d{5,}-[A-Za-z0-9]+$/.test(liffId)) {
-      throw new Error("LIFF ID ไม่ถูกต้อง");
-    }
-
-    const productState = new URLSearchParams({
-      title: product.title,
-      image: product.image
-    });
-    const liffState = `/line-send.html?${productState.toString()}`;
-    window.location.assign(`https://liff.line.me/${liffId}/?liff.state=${encodeURIComponent(liffState)}`);
+    await new Promise((resolve) => window.setTimeout(resolve, 900));
+    window.location.assign(lineUrl);
   } catch (error) {
     console.error("เปิดแชต LINE เพื่อสอบถามสินค้าไม่สำเร็จ", error);
-    window.alert("ยังส่งรูปเข้า LINE อัตโนมัติไม่ได้ กรุณาตรวจการตั้งค่า LIFF และ LINE Messaging API บน Vercel");
+    window.alert("เปิดแชต LINE ไม่สำเร็จ กรุณาลองกดสอบถามสินค้าอีกครั้ง");
   }
 };
 
