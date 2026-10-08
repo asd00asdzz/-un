@@ -118,17 +118,6 @@
     .forest-dart--one { --dart-y: 30%; --dart-duration: 8.5s; --dart-delay: -4s; }
     .forest-dart--two { --dart-y: 71%; --dart-duration: 11s; --dart-delay: -8s; width: clamp(95px, 14vw, 195px); opacity: .72; }
     .forest-dart--two svg { transform: scaleY(-1); }
-    .forest-fish { position: absolute; z-index: 0; left: -20%; width: var(--fish-size); color: #fff; opacity: .82; filter: drop-shadow(0 4px 5px rgba(0,0,0,.6)); animation: forest-fish-swim var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
-    .forest-fish svg { display: block; width: 100%; }
-    .forest-fish path:first-child { fill: currentColor; stroke: #191919; stroke-width: 2; }
-    .forest-fish path:nth-child(2) { fill: #d51f35; stroke: #191919; stroke-width: 2; }
-    .forest-fish path:nth-child(n+3) { fill: none; stroke: #191919; stroke-width: 1.8; }
-    .forest-fish circle { fill: #d51f35; stroke: #fff; stroke-width: 1.5; }
-    .forest-fish--one { top: 24%; --fish-size: 120px; --fish-duration: 15s; --fish-delay: -5s; }
-    .forest-fish--two { top: 63%; --fish-size: 92px; --fish-duration: 19s; --fish-delay: -13s; opacity: .9; }
-    .forest-fish--two svg { transform: scaleX(-1); }
-    .forest-fish--three { top: 43%; --fish-size: 72px; --fish-duration: 22s; --fish-delay: -17s; opacity: .7; }
-    @keyframes forest-fish-swim { from { transform: translateX(-4vw) translateY(7px); } to { transform: translateX(125vw) translateY(-12px); } }
     @keyframes forest-canopy-sway { from { transform: translateX(-1.5%) rotate(-1deg); } to { transform: translateX(1.5%) rotate(1deg); } }
     @keyframes forest-dart-shot { 0% { transform: translate3d(0, 0, 0) rotate(-3deg); opacity: 0; } 8% { opacity: .85; } 78% { opacity: .85; } 100% { transform: translate3d(145vw, -26px, 0) rotate(-3deg); opacity: 0; } }
     .home-gallery { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
@@ -230,13 +219,13 @@
 
     section { scroll-margin-top: 24px; }
     .section { padding: 78px 0; }
-    .underwater-section { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(ellipse at 76% 43%, rgba(213,31,53,.035), transparent 31%), linear-gradient(180deg, #fff 0%, #f7f7f7 48%, #fff 100%); }
+    .underwater-section { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(180deg, #fff 0%, #f7fcfd 48%, #fff 100%); }
     .underwater-section::before, .underwater-section::after { position: absolute; z-index: -1; inset: -35%; border-radius: 50%; content: ""; pointer-events: none; }
-    .underwater-section::before { background: radial-gradient(ellipse at 23% 47%, rgba(213,31,53,.055), transparent 28%), radial-gradient(ellipse at 76% 42%, rgba(75,75,75,.055), transparent 26%), radial-gradient(ellipse at 49% 79%, rgba(213,31,53,.035), transparent 30%); animation: water-light-drift 18s ease-in-out infinite alternate; }
-    .underwater-section::after { inset: 0; border-radius: 0; background: repeating-radial-gradient(ellipse at 76% 18%, transparent 0 54px, rgba(60,60,60,.045) 57px 59px, transparent 62px 96px); mask-image: linear-gradient(110deg, transparent 8%, #000 48%, transparent 92%); animation: water-ripple-drift 24s linear infinite; }
+    .underwater-section::before { background: radial-gradient(ellipse at 23% 47%, rgba(101,213,222,.12), transparent 28%), radial-gradient(ellipse at 76% 42%, rgba(133,222,225,.14), transparent 26%), radial-gradient(ellipse at 49% 79%, rgba(102,185,205,.09), transparent 30%); animation: water-light-drift 18s ease-in-out infinite alternate; }
+    .underwater-section::after { inset: 0; border-radius: 0; background: repeating-radial-gradient(ellipse at 76% 18%, transparent 0 54px, rgba(100,190,204,.055) 57px 59px, transparent 62px 96px); mask-image: linear-gradient(110deg, transparent 8%, #000 48%, transparent 92%); animation: water-ripple-drift 24s linear infinite; }
     @keyframes water-light-drift { from { transform: translate3d(-2%, -1%, 0) rotate(-4deg) scale(.96); } to { transform: translate3d(2%, 2%, 0) rotate(4deg) scale(1.04); } }
     @keyframes water-ripple-drift { from { transform: translateX(-3%) scale(1); } to { transform: translateX(3%) scale(1.08); } }
-    .underwater-scene { position: absolute; z-index: -1; top: 50%; left: 50%; width: min(92vw, 1180px); height: 96%; overflow: visible; opacity: .72; pointer-events: none; filter: drop-shadow(0 12px 18px rgba(30,30,30,.2)); transform: translate(-50%, -50%); }
+    .underwater-scene { position: absolute; z-index: -1; top: 50%; left: 50%; width: min(92vw, 1180px); height: 96%; overflow: visible; opacity: .48; pointer-events: none; filter: drop-shadow(0 12px 18px rgba(38,151,166,.2)); transform: translate(-50%, -50%); }
     .underwater-scene svg { width: 100%; height: 100%; overflow: visible; }
     .underwater-fish { transform-box: fill-box; transform-origin: center; animation: underwater-fish-swim 8s ease-in-out infinite alternate; }
     .underwater-dart { transform-box: fill-box; transform-origin: center; animation: underwater-dart-flight 4.8s ease-in-out infinite; }
@@ -266,20 +255,20 @@
     .category h3 { margin: 18px 0 5px; font-size: 17px; }
     .category p { margin: 0; color: var(--muted); font-size: 13px; }
 
-    .products-wrap { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(180deg, #f3f3f3 0%, #eeeeee 48%, #f3f3f3 100%); }
+    .products-wrap { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(180deg, #f3f3f3 0%, #eef4f4 48%, #f3f3f3 100%); }
     .products-wrap > .container { position: relative; z-index: 1; }
     .product-fish-school { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
     .product-fish-school > svg { position: absolute; width: 0; height: 0; overflow: hidden; }
-    .school-fish { position: absolute; left: -16%; width: var(--fish-size); height: auto; color: #262626; opacity: .36; filter: drop-shadow(0 5px 5px rgba(0,0,0,.2)); animation: school-fish-drift var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
+    .school-fish { position: absolute; left: -16%; width: var(--fish-size); height: auto; color: #3f8994; opacity: .29; filter: drop-shadow(0 5px 5px rgba(56,132,144,.18)); animation: school-fish-drift var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
     .school-fish svg { display: block; width: 100%; overflow: visible; }
     .school-fish use { fill: currentColor; }
     .school-fish--one { top: 12%; --fish-size: 154px; --fish-duration: 34s; --fish-delay: -25s; }
-    .school-fish--two { top: 31%; --fish-size: 100px; --fish-duration: 28s; --fish-delay: -17s; opacity: .3; }
+    .school-fish--two { top: 31%; --fish-size: 100px; --fish-duration: 28s; --fish-delay: -17s; opacity: .23; }
     .school-fish--two svg { transform: scaleX(-1); }
-    .school-fish--three { top: 82%; --fish-size: 128px; --fish-duration: 39s; --fish-delay: -31s; opacity: .32; }
-    .school-fish--four { top: 19%; --fish-size: 78px; --fish-duration: 31s; --fish-delay: -9s; opacity: .28; }
+    .school-fish--three { top: 82%; --fish-size: 128px; --fish-duration: 39s; --fish-delay: -31s; opacity: .25; }
+    .school-fish--four { top: 19%; --fish-size: 78px; --fish-duration: 31s; --fish-delay: -9s; opacity: .2; }
     .school-fish--four svg { transform: scaleX(-1); }
-    .school-fish--five { top: 73%; --fish-size: 156px; --fish-duration: 43s; --fish-delay: -37s; opacity: .28; }
+    .school-fish--five { top: 73%; --fish-size: 156px; --fish-duration: 43s; --fish-delay: -37s; opacity: .2; }
     @keyframes school-fish-drift { 0% { transform: translate3d(-5vw, 0, 0) rotate(-2deg); } 48% { transform: translate3d(55vw, -14px, 0) rotate(2deg); } 100% { transform: translate3d(120vw, 3px, 0) rotate(-1deg); } }
     @media (prefers-reduced-motion: reduce) { .school-fish { animation: none; left: auto; } .school-fish--one { left: 12%; } .school-fish--two { left: 34%; } .school-fish--three { left: 58%; } .school-fish--four { left: 74%; } .school-fish--five { left: 86%; } }
     .products {
@@ -315,15 +304,13 @@
     .price small { color: var(--muted); font-size: 11px; font-weight: 500; }
     .ask-link { color: #c51c31; font-size: 13px; font-weight: 800; }
     .ask-link:hover { color: #941326; }
-    .view-product-link { color: #c51c31; font-size: 16px; font-weight: 800; }
-    .view-product-link:hover { color: #941326; }
 
     .about { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 56px; }
-    .about-card { position: relative; display: grid; min-height: 315px; place-items: center; overflow: hidden; border-radius: 28px; background: linear-gradient(145deg, #3b3b3b, #1b1b1b 55%, #a7192c); }
+    .about-card { position: relative; display: grid; min-height: 315px; place-items: center; overflow: hidden; border-radius: 28px; background: linear-gradient(155deg, #bde8df, #438d91 52%, #174d5b); }
     .about-card::before, .about-card::after { position: absolute; width: 340px; height: 135px; border: 1px solid rgba(255,255,255,.36); border-radius: 50%; content: ""; transform: rotate(-14deg); }
     .about-card::after { width: 410px; height: 170px; }
     .about-fish-school { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-    .about-fish { position: absolute; left: -34%; width: var(--fish-size); color: #fff; opacity: .94; filter: drop-shadow(0 5px 6px rgba(0,0,0,.6)); animation: about-fish-drift var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
+    .about-fish { position: absolute; left: -34%; width: var(--fish-size); color: #e2fff1; opacity: .75; filter: drop-shadow(0 5px 6px rgba(4,43,51,.28)); animation: about-fish-drift var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
     .about-fish svg { display: block; width: 100%; }
     .about-fish--one { top: 19%; --fish-size: 142px; --fish-duration: 13s; --fish-delay: -6s; }
     .about-fish--two { top: 57%; --fish-size: 92px; --fish-duration: 10s; --fish-delay: -4s; opacity: .62; }
@@ -347,36 +334,11 @@
     .catalog-image-dialog::backdrop { background: rgba(8,17,18,.78); backdrop-filter: blur(5px); }
     .catalog-image-dialog-photo { display: block; width: 100%; height: min(76vh, 760px); object-fit: contain; border-radius: 12px; }
     .catalog-image-dialog-close { position: absolute; top: 8px; right: 10px; display: grid; width: 38px; height: 38px; place-items: center; border: 0; border-radius: 50%; background: #d51f35; color: white; font-size: 28px; line-height: 1; cursor: pointer; }
-    @media (prefers-reduced-motion: reduce) { .forest-canopy, .forest-dart, .forest-fish, .about-fish { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .forest-canopy, .forest-dart, .about-fish { animation: none; } }
     .contact-content { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
     .contact-banner h2 { margin: 0 0 9px; font-size: 29px; }
     .contact-banner p { margin: 0; color: #ddd; font-size: 14px; }
     .contact-details { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 22px; color: #eee; font-size: 13px; }
-    .contact-dialog { position: fixed; inset: 0; width: min(94vw, 650px); max-width: none; max-height: min(90vh, 820px); margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.28); border-radius: 28px; background: #10252b; color: #fff; box-shadow: 0 28px 100px rgba(0,0,0,.55); animation: contact-dialog-pop .38s cubic-bezier(.2,.8,.25,1.25) both; }
-    .contact-dialog::backdrop { background: rgba(5,15,19,.76); backdrop-filter: blur(7px); }
-    @keyframes contact-dialog-pop { from { opacity: 0; transform: translateY(26px) scale(.88); } to { opacity: 1; transform: translateY(0) scale(1); } }
-    .contact-dialog-content { position: relative; max-height: min(90vh, 820px); padding: 30px; overflow-x: hidden; overflow-y: auto; isolation: isolate; background: radial-gradient(ellipse at 82% 0%, rgba(68,177,196,.3), transparent 38%), linear-gradient(145deg, #10252b, #153c42 60%, #0d242b); }
-    .contact-dialog-content::before, .contact-dialog-content::after { position: absolute; z-index: -1; width: 280px; height: 280px; border: 1px solid rgba(131,224,228,.18); border-radius: 50%; content: ""; pointer-events: none; }
-    .contact-dialog-content::before { top: -160px; right: -65px; box-shadow: 0 0 0 28px rgba(131,224,228,.04), 0 0 0 58px rgba(131,224,228,.035); }
-    .contact-dialog-content::after { bottom: -200px; left: -110px; }
-    .contact-dialog-fish { position: absolute; z-index: -1; top: var(--fish-y, 34%); right: -70px; color: rgba(160,237,236,.24); font-size: var(--fish-size, 56px); opacity: 0; animation: contact-fish-swim var(--fish-duration, 10s) linear var(--fish-delay, 0s) infinite; pointer-events: none; }
-    .contact-dialog-fish--two { --fish-y: 61%; --fish-size: 38px; --fish-duration: 12s; --fish-delay: -5s; }
-    .contact-dialog-fish--three { --fish-y: 14%; --fish-size: 30px; --fish-duration: 9s; --fish-delay: -2.5s; }
-    @keyframes contact-fish-swim { 0% { transform: translate(20px, 0) scaleX(1); opacity: 0; } 12%, 78% { opacity: .75; } 50% { transform: translate(-300px, 12px) scaleX(1); } 100% { transform: translate(-680px, -16px) scaleX(-1); opacity: 0; } }
-    .contact-dialog-heading { position: relative; padding-right: 42px; }
-    .contact-dialog-heading small { color: #8de2df; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
-    .contact-dialog-heading h2 { margin: 7px 0 5px; font-size: 28px; }
-    .contact-dialog-heading p { margin: 0; color: #d2e4e5; font-size: 14px; }
-    .contact-dialog-close { position: absolute; top: 20px; right: 20px; display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 26px; cursor: pointer; }
-    .contact-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; margin-top: 24px; }
-    .contact-option { display: flex; min-height: 58px; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; background: rgba(255,255,255,.09); color: #fff; transition: transform .2s, background .2s, border-color .2s; }
-    .contact-option:hover, .contact-option:focus-visible { transform: translateY(-2px); border-color: rgba(141,226,223,.65); background: rgba(255,255,255,.16); }
-    .contact-option-icon { display: grid; width: 36px; height: 36px; flex: 0 0 36px; place-items: center; border-radius: 12px; background: rgba(141,226,223,.18); font-size: 18px; }
-    .contact-option strong, .contact-option small { display: block; }
-    .contact-option strong { font-size: 13px; }
-    .contact-option small { margin-top: 2px; color: #c3d6d8; font-size: 12px; }
-    .contact-dialog-product { min-height: 19px; margin: 17px 0 0; color: #b8d6d7; font-size: 12px; }
-    @media (prefers-reduced-motion: reduce) { .contact-dialog { animation: none; } .contact-dialog-fish { animation: none; } }
     footer { padding: 27px 0; color: var(--muted); font-size: 12px; }
     .footer-row { display: flex; justify-content: space-between; gap: 20px; }
 
@@ -436,10 +398,6 @@
       .contact-banner { padding: 28px 22px; }
       .contact-content { align-items: flex-start; flex-direction: column; }
       .contact-banner h2 { font-size: 25px; }
-      .contact-dialog-content { padding: 25px 18px; }
-      .contact-dialog-heading h2 { font-size: 24px; }
-      .contact-options { grid-template-columns: 1fr; gap: 8px; margin-top: 18px; }
-      .contact-dialog-close { top: 12px; right: 12px; }
       .footer-row { flex-direction: column; gap: 7px; }
     }
   </style>
@@ -456,7 +414,7 @@
         <a href="#products">สินค้าแนะนำ</a>
         <a href="#about">เกี่ยวกับร้าน</a>
       </nav>
-      <a class="nav-cta" href="#contact" data-contact-options>ติดต่อร้าน <span aria-hidden="true">↗</span></a>
+      <a class="nav-cta" href="#contact">ติดต่อร้าน <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
@@ -508,9 +466,6 @@
             <path d="M0 599Q265 535 502 586T1008 582T1440 546V700H0Z" fill="#25433d" opacity=".43"/>
           </svg>
         </div>
-        <span class="forest-fish forest-fish--one" aria-hidden="true"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><path d="M106 24 127 5l22 22M108 76l20 19 21-21M88 36q12 14 0 28m18-34q13 20 0 40m18-43q14 23 0 46m21-42q12 21 0 40" stroke-linecap="round"/><circle cx="176" cy="43" r="4"/></svg></span>
-        <span class="forest-fish forest-fish--two" aria-hidden="true"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><path d="M106 24 127 5l22 22M108 76l20 19 21-21M88 36q12 14 0 28m18-34q13 20 0 40m18-43q14 23 0 46m21-42q12 21 0 40" stroke-linecap="round"/><circle cx="176" cy="43" r="4"/></svg></span>
-        <span class="forest-fish forest-fish--three" aria-hidden="true"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><path d="M106 24 127 5l22 22M108 76l20 19 21-21M88 36q12 14 0 28m18-34q13 20 0 40m18-43q14 23 0 46m21-42q12 21 0 40" stroke-linecap="round"/><circle cx="176" cy="43" r="4"/></svg></span>
         <span class="forest-dart forest-dart--one">
           <svg viewBox="0 0 300 48" aria-hidden="true"><path d="M5 24H262" stroke="#d8c18e" stroke-width="5"/><path d="M15 24 1 12v24z" fill="#9fb38d"/><path d="M254 24h38l-19-14m19 14-19 14" fill="none" stroke="#ead9ad" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M77 24 61 7l27 13m-11 4L61 41l27-13" fill="#b9c9a2" stroke="#60775b" stroke-width="2"/></svg>
         </span>
@@ -548,27 +503,27 @@
           <defs>
             <linearGradient id="water-fish-body" x1="0" y1="0" x2=".8" y2="1">
               <stop stop-color="#d6fbf2"/>
-              <stop offset=".35" stop-color="#eee"/>
-              <stop offset=".72" stop-color="#b5162b"/>
-              <stop offset="1" stop-color="#fff"/>
+              <stop offset=".35" stop-color="#75c9cb"/>
+              <stop offset=".72" stop-color="#4198a9"/>
+              <stop offset="1" stop-color="#b2e6dd"/>
             </linearGradient>
             <linearGradient id="water-fish-fin" x1="0" y1="0" x2="1" y2="1">
-              <stop stop-color="#fff"/>
-              <stop offset="1" stop-color="#d51f35"/>
+              <stop stop-color="#8ed9d5"/>
+              <stop offset="1" stop-color="#3b899d"/>
             </linearGradient>
           </defs>
-          <g class="underwater-fish" stroke="#222" stroke-linejoin="round">
+          <g class="underwater-fish" stroke="#347d8c" stroke-linejoin="round">
             <path d="M366 180 C330 152 291 129 253 126 C273 151 280 167 281 180 C280 193 273 210 253 234 C291 231 330 208 366 180z" fill="url(#water-fish-fin)" stroke-width="8"/>
             <path d="M350 180 C415 91 608 76 746 137 Q783 153 828 180 Q783 207 746 223 C608 284 415 269 350 180z" fill="url(#water-fish-body)" stroke-width="9"/>
             <path d="M465 112 C492 69 548 72 596 101 C558 99 526 115 498 139z" fill="url(#water-fish-fin)" stroke-width="7"/>
             <path d="M521 246 C555 291 607 285 647 239 C606 258 568 246 546 226z" fill="url(#water-fish-fin)" stroke-width="7"/>
             <path d="M744 143 Q773 157 811 180 Q773 201 744 217 Q770 180 744 143z" fill="#d4f7eb" opacity=".8" stroke-width="4"/>
             <path d="M780 183 Q804 190 824 180" fill="none" stroke="#347d8c" stroke-width="4" stroke-linecap="round"/>
-            <path d="M436 152 Q459 180 436 210 M461 147 Q485 180 461 214" fill="none" stroke="#222" stroke-width="5" opacity=".75"/>
+            <path d="M436 152 Q459 180 436 210 M461 147 Q485 180 461 214" fill="none" stroke="#397f8d" stroke-width="5" opacity=".65"/>
             <path d="M503 130 Q526 180 503 231 M550 115 Q574 180 550 246 M600 110 Q623 180 600 250 M650 122 Q671 180 650 238 M695 137 Q711 180 695 222" fill="none" stroke="#e1fff5" stroke-width="3" opacity=".5"/>
             <circle cx="761" cy="163" r="11" fill="#f7ffff" stroke-width="4"/>
             <circle cx="765" cy="163" r="5" fill="#173b48" stroke="none"/>
-            <path d="M794 190 Q811 193 822 180" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+            <path d="M794 190 Q811 193 822 180" fill="none" stroke="#347d8c" stroke-width="4" stroke-linecap="round"/>
             <path d="M388 178 Q354 165 329 156 M388 183 Q352 194 328 207" fill="none" stroke="#d9fbf2" stroke-width="4" opacity=".75"/>
           </g>
           <g class="underwater-dart" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -579,7 +534,7 @@
             <path d="M168 151 L150 132 L183 145 M168 151 L150 170 L183 157" fill="#b4e8df" stroke="#347d8c" stroke-width="4"/>
             <circle cx="119" cy="151" r="8" fill="#d5f3e7" stroke="#347d8c" stroke-width="3"/>
           </g>
-          <g fill="none" stroke="#d51f35" stroke-width="3" opacity=".8">
+          <g fill="none" stroke="#75cbd0" stroke-width="3" opacity=".8">
             <ellipse cx="270" cy="82" rx="15" ry="8"/>
             <ellipse cx="290" cy="51" rx="7" ry="4"/>
             <ellipse cx="875" cy="293" rx="12" ry="6"/>
@@ -595,7 +550,7 @@
         <div class="categories">
           <a class="category" href="15.html#spearguns"><span class="category-icon" aria-hidden="true">🏹</span><h3>หน้าไม้ยิงปลา</h3><p>ชมรูปสินค้าและสอบถามแต่ละรุ่น</p></a>
           <a class="category" href="15.html#shafts"><span class="category-icon" aria-hidden="true">➶</span><h3>ลูกดอกและอะไหล่</h3><p>สอบถามขนาดและอะไหล่ให้ตรงรุ่น</p></a>
-          <a class="category" href="15.html#rat-spearguns"><span class="category-icon" aria-hidden="true">🎯</span><h3>หน้าไม้ยิงหนู</h3><p>ชมสินค้าและสอบถามรายละเอียดกับทางร้าน</p></a>
+          <a class="category" href="15.html#diving"><span class="category-icon" aria-hidden="true">🤿</span><h3>อุปกรณ์ดำน้ำ</h3><p>อุปกรณ์เสริมสำหรับเตรียมลงน้ำ</p></a>
           <a class="category" href="15.html#accessories"><span class="category-icon" aria-hidden="true">🎒</span><h3>อุปกรณ์เสริม</h3><p>เลือกดูของใช้และอุปกรณ์เพิ่มเติม</p></a>
         </div>
       </div>
@@ -659,9 +614,9 @@
           <div>
             <h2>กำลังหาอุปกรณ์หน้าไม้ยิงปลาอยู่ไหม?</h2>
             <p>สอบถามสินค้า อะไหล่ และรายละเอียดการใช้งานกับทางร้านได้เลย</p>
-            <div class="contact-details"><span>☎ โทรหาแอดมินได้ในหน้าติดต่อ</span><span>💬 LINE: @634lfegy</span></div>
+            <div class="contact-details"><span>☎ 08X-XXX-XXXX</span><span>💬 LINE: @rimbuengfishing</span><span>📍 เปลี่ยนเป็นที่อยู่ร้านของคุณ</span></div>
           </div>
-          <a class="button" href="#contact" data-contact-options>แชตสอบถาม <span aria-hidden="true">&nbsp;↗</span></a>
+          <a class="button" href="https://line.me/" target="_blank" rel="noopener noreferrer">แชตสอบถาม <span aria-hidden="true">&nbsp;↗</span></a>
         </div>
       </div>
     </section>
@@ -670,30 +625,6 @@
   <footer>
     <div class="container footer-row"><span>© <span id="year">2026</span> ธนกรฟิชชิ่ง · หน้าไม้ยิงปลาและอุปกรณ์</span><span>เลือกใช้อุปกรณ์อย่างรับผิดชอบและคำนึงถึงความปลอดภัย</span></div>
   </footer>
-  <dialog class="contact-dialog" id="contact-options-dialog" aria-labelledby="contact-dialog-title">
-    <div class="contact-dialog-content">
-      <span class="contact-dialog-fish" aria-hidden="true">🐟</span>
-      <span class="contact-dialog-fish contact-dialog-fish--two" aria-hidden="true">🐟</span>
-      <span class="contact-dialog-fish contact-dialog-fish--three" aria-hidden="true">🐟</span>
-      <button class="contact-dialog-close" type="button" data-contact-close aria-label="ปิดหน้าต่าง">×</button>
-      <div class="contact-dialog-heading">
-        <small>RIM BUENG FISHING</small>
-        <h2 id="contact-dialog-title">ติดต่อธนกรฟิชชิ่ง</h2>
-        <p>เลือกช่องทางที่สะดวก ทีมงานพร้อมให้บริการ</p>
-      </div>
-      <div class="contact-options">
-        <a class="contact-option" href="https://www.facebook.com/share/19spwr42bH/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><span class="contact-option-icon" aria-hidden="true">f</span><span><strong>Facebook</strong><small>ส่งข้อความถึงร้าน</small></span></a>
-        <a class="contact-option" href="https://th.shp.ee/fhYQN7sw3" target="_blank" rel="noopener noreferrer"><span class="contact-option-icon" aria-hidden="true">🛍️</span><span><strong>Shopee</strong><small>เลือกชมสินค้าในร้าน</small></span></a>
-        <a class="contact-option" href="https://line.me/R/ti/p/%40634lfegy" data-line-contact target="_blank" rel="noopener noreferrer"><span class="contact-option-icon" aria-hidden="true">💬</span><span><strong>LINE</strong><small>@634lfegy</small></span></a>
-        <a class="contact-option" href="tel:0942627364"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินเจน</strong><small>094-262-7364</small></span></a>
-        <a class="contact-option" href="tel:0937263051"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินเหมย</strong><small>093-726-3051</small></span></a>
-        <a class="contact-option" href="tel:0637144801"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>โม</strong><small>063-714-4801</small></span></a>
-        <a class="contact-option" href="tel:0942710056"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินไข่มุก</strong><small>094-271-0056</small></span></a>
-        <a class="contact-option" href="tel:0629056915"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินเอ๊ะ</strong><small>062-905-6915</small></span></a>
-      </div>
-      <p class="contact-dialog-product">เลือกช่องทางที่สะดวกเพื่อติดต่อร้าน</p>
-    </div>
-  </dialog>
   <script src="catalog-products.js"></script>
   <script>
     if (!Array.isArray(window.catalogProducts)) {
@@ -713,8 +644,10 @@
 
       const imageLink = document.createElement("a");
       imageLink.className = "product-visual product-image-link";
-      imageLink.href = "#contact";
-      imageLink.setAttribute("aria-label", `สอบถามเกี่ยวกับ${product.title}`);
+      imageLink.href = product.image;
+      imageLink.target = "_blank";
+      imageLink.rel = "noopener noreferrer";
+      imageLink.setAttribute("aria-label", `เปิดรูป${product.title}ภาพเต็ม`);
 
       if (product.tag) {
         const tag = document.createElement("span");
@@ -749,12 +682,8 @@
       });
       const askLink = document.createElement("a");
       askLink.className = "ask-link";
-      askLink.href = "#contact";
+      askLink.href = "15.html#contact";
       askLink.textContent = "สอบถาม →";
-      askLink.addEventListener("click", (event) => {
-        event.preventDefault();
-        window.contactProductOnLine(article, document.querySelector(".contact-banner"), product);
-      });
 
       bottom.append(viewImageLink, askLink);
       info.append(title, description, bottom);
@@ -762,8 +691,14 @@
       article.addEventListener("click", (event) => {
         if (event.target.closest(".product-bottom")) return;
         const clickedLink = event.target.closest("a");
+        if (clickedLink?.classList.contains("product-image-link")) {
+          event.preventDefault();
+          window.showCatalogImage(product.image, product.alt);
+          return;
+        }
+        if (clickedLink?.classList.contains("ask-link")) return;
         if (clickedLink) event.preventDefault();
-        window.contactProductOnLine(article, document.querySelector(".contact-banner"), product);
+        window.carryProductToContact(article, document.querySelector(".contact-banner"));
       });
       return article;
     }
