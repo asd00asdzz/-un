@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171717">
+  <meta name="description" content="ธนกรฟิชชิ่ง รวมหน้าไม้ยิงปลา อะไหล่ และอุปกรณ์เสริม พร้อมสอบถามรายละเอียดสินค้า">
+  <title>ธนกรฟิชชิ่ง | หน้าไม้ยิงปลาและอุปกรณ์</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #1b1b1b;
+      --muted: #696969;
+      --green: #171717;
+      --green-light: #303030;
+      --lime: #d51f35;
+      --paper: #fff;
+      --white: #fff;
+      --line: #e5e5e5;
+      --radius: 22px;
+      font-family: "Leelawadee UI", "Noto Sans Thai", Tahoma, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: var(--paper); }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .container { width: min(1120px, calc(100% - 40px)); margin-inline: auto; }
+
+    .topbar {
+      background: var(--green);
+      color: #eee;
+      font-size: 13px;
+      text-align: center;
+      padding: 9px 16px;
+    }
+    .topbar strong { color: var(--lime); font-weight: 700; }
+    header { background: var(--white); border-bottom: 1px solid var(--line); }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 800; }
+    .brand-mark {
+      display: block;
+      flex: 0 0 52px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .brand-name { font-size: 19px; letter-spacing: -.4px; }
+    .brand-name small { display: block; margin-top: 1px; color: var(--muted); font-size: 11px; font-weight: 500; letter-spacing: .5px; }
+    .nav-links { display: flex; align-items: center; gap: 30px; color: #555; font-size: 14px; }
+    .nav-links a:hover { color: var(--lime); }
+    .nav-cta, .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 19px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--lime);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 800;
+      transition: transform .2s, background .2s;
+    }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); background: #b9162a; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 74px 0 80px;
+      background:
+        radial-gradient(ellipse at 82% 22%, rgba(213, 31, 53, .3), transparent 27%),
+        radial-gradient(ellipse at 77% 104%, rgba(213, 31, 53, .24), transparent 40%),
+        linear-gradient(118deg, #111 4%, #242424 58%, #111);
+      color: var(--white);
+    }
+    .hero::before, .hero::after {
+      position: absolute;
+      content: "";
+      pointer-events: none;
+      border: 1px solid rgba(213, 31, 53, .24);
+      border-radius: 50%;
+    }
+    .hero::before { width: 490px; height: 490px; right: -110px; top: -240px; }
+    .hero::after { width: 390px; height: 390px; right: -60px; top: -190px; }
+    .hero-content { position: relative; z-index: 2; display: grid; min-height: 510px; grid-template-columns: 1fr; align-items: center; gap: 30px; pointer-events: none; }
+    .hero-content > div:first-child { position: relative; z-index: 2; max-width: 650px; padding: 18px 20px; border-radius: 22px; background: linear-gradient(90deg, rgba(17,17,17,.84), rgba(17,17,17,.55), transparent); pointer-events: none; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; color: var(--lime); font-size: 13px; font-weight: 700; letter-spacing: .3px; }
+    .eyebrow::before { width: 22px; height: 1px; background: currentColor; content: ""; }
+    h1 { max-width: 600px; margin: 18px 0 17px; font-size: clamp(38px, 5vw, 60px); line-height: 1.18; letter-spacing: -1.6px; }
+    h1 span { color: var(--lime); }
+    .hero-copy { max-width: 480px; margin: 0; color: #e0e0e0; font-size: 16px; line-height: 1.9; }
+    .hero-actions { display: flex; align-items: center; gap: 20px; margin-top: 29px; pointer-events: none; }
+    .hero-actions a { pointer-events: auto; }
+    .text-link { color: #f2f2f2; font-size: 14px; font-weight: 700; }
+    .text-link span { margin-left: 5px; color: var(--lime); }
+    .hero-art {
+      position: absolute;
+      z-index: 0;
+      inset: 0;
+      pointer-events: none;
+    }
+    .forest-backdrop { position: absolute; z-index: 0; inset: 0; overflow: hidden; opacity: .76; pointer-events: none; background: radial-gradient(ellipse at 76% 10%, rgba(210,228,177,.3), transparent 24%), linear-gradient(180deg, rgba(9,26,24,.1), rgba(9,20,21,.4)); }
+    .forest-backdrop svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .forest-canopy { transform-box: fill-box; transform-origin: center; animation: forest-canopy-sway 12s ease-in-out infinite alternate; }
+    .forest-canopy--far { opacity: .65; animation-delay: -5s; }
+    .forest-dart { position: absolute; top: var(--dart-y); left: -18%; width: clamp(125px, 19vw, 260px); color: #e5c88e; filter: drop-shadow(0 0 8px rgba(205,244,217,.58)); animation: forest-dart-shot var(--dart-duration) linear var(--dart-delay) infinite; }
+    .forest-dart svg { display: block; width: 100%; overflow: visible; }
+    .forest-dart--one { --dart-y: 30%; --dart-duration: 8.5s; --dart-delay: -4s; }
+    .forest-dart--two { --dart-y: 71%; --dart-duration: 11s; --dart-delay: -8s; width: clamp(95px, 14vw, 195px); opacity: .72; }
+    .forest-dart--two svg { transform: scaleY(-1); }
+    .forest-fish { position: absolute; z-index: 0; left: -20%; width: var(--fish-size); color: #fff; opacity: .82; filter: drop-shadow(0 4px 5px rgba(0,0,0,.6)); animation: forest-fish-swim var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
+    .forest-fish svg { display: block; width: 100%; }
+    .forest-fish path:first-child { fill: currentColor; stroke: #191919; stroke-width: 2; }
+    .forest-fish path:nth-child(2) { fill: #d51f35; stroke: #191919; stroke-width: 2; }
+    .forest-fish path:nth-child(n+3) { fill: none; stroke: #191919; stroke-width: 1.8; }
+    .forest-fish circle { fill: #d51f35; stroke: #fff; stroke-width: 1.5; }
+    .forest-fish--one { top: 24%; --fish-size: 120px; --fish-duration: 15s; --fish-delay: -5s; }
+    .forest-fish--two { top: 63%; --fish-size: 92px; --fish-duration: 19s; --fish-delay: -13s; opacity: .9; }
+    .forest-fish--two svg { transform: scaleX(-1); }
+    .forest-fish--three { top: 43%; --fish-size: 72px; --fish-duration: 22s; --fish-delay: -17s; opacity: .7; }
+    @keyframes forest-fish-swim { from { transform: translateX(-4vw) translateY(7px); } to { transform: translateX(125vw) translateY(-12px); } }
+    @keyframes forest-canopy-sway { from { transform: translateX(-1.5%) rotate(-1deg); } to { transform: translateX(1.5%) rotate(1deg); } }
+    @keyframes forest-dart-shot { 0% { transform: translate3d(0, 0, 0) rotate(-3deg); opacity: 0; } 8% { opacity: .85; } 78% { opacity: .85; } 100% { transform: translate3d(145vw, -26px, 0) rotate(-3deg); opacity: 0; } }
+    .home-gallery { position: absolute; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
+    .home-gallery-link {
+      position: absolute;
+      display: block;
+      width: clamp(76px, 8.5vw, 110px);
+      height: clamp(60px, 6.5vw, 84px);
+      padding: 4px;
+      border: 2px solid transparent;
+      border-radius: 18px;
+      background: linear-gradient(#171717, #171717) padding-box, linear-gradient(135deg, #d51f35, #ffd166, #fff, #d51f35) border-box;
+      box-shadow: 0 8px 22px rgba(0,0,0,.36), 0 0 16px rgba(213,31,53,.24);
+      opacity: .48;
+      pointer-events: auto;
+      animation: home-image-drift 5.8s ease-in-out infinite;
+      transition: opacity .25s ease, scale .25s ease, box-shadow .25s ease;
+    }
+    .home-gallery-link:nth-child(1) { top: 8%; left: 4%; --drift-x: 15px; --drift-y: -12px; animation-delay: -.7s; }
+    .home-gallery-link:nth-child(2) { top: 17%; left: 23%; --drift-x: -12px; --drift-y: 15px; animation-delay: -2.3s; }
+    .home-gallery-link:nth-child(3) { top: 5%; left: 44%; --drift-x: 13px; --drift-y: 12px; animation-delay: -3.8s; }
+    .home-gallery-link:nth-child(4) { top: 17%; right: 20%; --drift-x: -15px; --drift-y: -12px; animation-delay: -1.5s; }
+    .home-gallery-link:nth-child(5) { top: 6%; right: 4%; --drift-x: 12px; --drift-y: 14px; animation-delay: -4.1s; }
+    .home-gallery-link:nth-child(6) { bottom: 8%; left: 10%; --drift-x: -12px; --drift-y: 13px; animation-delay: -2.9s; }
+    .home-gallery-link:nth-child(7) { bottom: 15%; left: 31%; --drift-x: 14px; --drift-y: -12px; animation-delay: -.3s; }
+    .home-gallery-link:nth-child(8) { bottom: 5%; left: 51%; --drift-x: -13px; --drift-y: 12px; animation-delay: -3.2s; }
+    .home-gallery-link:nth-child(9) { bottom: 14%; right: 20%; --drift-x: 12px; --drift-y: 14px; animation-delay: -1.9s; }
+    .home-gallery-link:nth-child(10) { right: 5%; bottom: 6%; --drift-x: -14px; --drift-y: -12px; animation-delay: -4.6s; }
+    .home-gallery-link:hover, .home-gallery-link:focus-visible { z-index: 10; opacity: 1; scale: 1.14; box-shadow: 0 12px 32px rgba(0,0,0,.55), 0 0 26px rgba(213,31,53,.5); animation-name: home-image-drift, home-frame-pop; animation-duration: 5.8s, .62s; animation-timing-function: ease-in-out, ease-out; animation-iteration-count: infinite, 1; animation-fill-mode: none, forwards; }
+    .home-gallery-link.is-popping { animation-name: home-image-drift, home-frame-pop; animation-duration: 5.8s, .62s; animation-timing-function: ease-in-out, ease-out; animation-iteration-count: infinite, 1; }
+    .home-gallery-image, .home-gallery-video { display: block; width: 100%; height: 100%; border-radius: 11px; object-fit: cover; filter: drop-shadow(0 8px 8px rgba(0,0,0,.4)); }
+    .home-gallery-placeholder { display: grid; place-items: center; color: rgba(255,255,255,.75); font-size: 11px; text-align: center; text-shadow: 0 2px 6px #000; }
+    @keyframes home-image-drift { 0%, 100% { translate: 0 0; rotate: -2deg; } 50% { translate: var(--drift-x) var(--drift-y); rotate: 2deg; } }
+    @keyframes home-frame-pop { 0% { scale: 1; } 42% { scale: 1.24; } 72% { scale: .96; } 100% { scale: 1.08; } }
+    .sun { position: absolute; top: 2px; right: 80px; width: 100px; height: 100px; border-radius: 50%; background: #d51f35; opacity: .92; box-shadow: 0 0 70px rgba(213, 31, 53, .25); animation: sun-glow 5s ease-in-out infinite; }
+    .pond {
+      position: absolute;
+      right: 0;
+      bottom: 20px;
+      width: 100%;
+      height: 175px;
+      border-radius: 50%;
+      background: linear-gradient(170deg, rgba(150, 150, 150, .42), rgba(65, 65, 65, .26));
+      transform: rotate(-8deg);
+      animation: pond-drift 7s ease-in-out infinite;
+    }
+    .pond::before {
+      position: absolute;
+      left: 38%;
+      bottom: 25%;
+      width: 24%;
+      height: 20%;
+      border: 1px solid rgba(255, 255, 255, .7);
+      border-radius: 50%;
+      content: "";
+      animation: water-ripple 4s ease-out infinite;
+    }
+    .pond::after {
+      position: absolute;
+      inset: 24px 8% auto;
+      height: 1px;
+      background: rgba(255, 255, 255, .48);
+      box-shadow: 0 18px 0 rgba(255, 255, 255, .25), 55px 39px 0 rgba(255, 255, 255, .19), 180px 65px 0 rgba(255, 255, 255, .2);
+      content: "";
+      animation: water-shimmer 4.5s ease-in-out infinite;
+    }
+    .hero-art { isolation: isolate; }
+    @keyframes sun-glow {
+      0%, 100% { box-shadow: 0 0 55px rgba(213, 31, 53, .2); }
+      50% { box-shadow: 0 0 85px rgba(213, 31, 53, .38); }
+    }
+    @keyframes pond-drift {
+      0%, 100% { transform: rotate(-8deg) translateY(0); }
+      50% { transform: rotate(-6deg) translateY(-5px); }
+    }
+    @keyframes water-ripple {
+      0% { opacity: .65; transform: scale(.45); }
+      75%, 100% { opacity: 0; transform: scale(2.4); }
+    }
+    @keyframes water-shimmer {
+      0%, 100% { opacity: .55; transform: translateX(-5px) scaleX(.96); }
+      50% { opacity: .95; transform: translateX(7px) scaleX(1.02); }
+    }
+    @keyframes home-image-float { 0%, 100% { transform: translateY(5px) scale(.98); } 50% { transform: translateY(-5px) scale(1.02); } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+    .benefits { position: relative; z-index: 2; margin-top: -1px; background: var(--white); }
+    .benefit-row { display: grid; grid-template-columns: repeat(3, 1fr); padding: 23px 0; }
+    .benefit { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 8px 15px; }
+    .benefit + .benefit { border-left: 1px solid var(--line); }
+    .benefit-icon { display: grid; width: 42px; height: 42px; flex: 0 0 42px; place-items: center; border-radius: 14px; background: #f4e9ea; font-size: 20px; }
+    .benefit strong { display: block; font-size: 14px; }
+    .benefit small { display: block; margin-top: 3px; color: var(--muted); font-size: 12px; }
+
+    section { scroll-margin-top: 24px; }
+    .section { padding: 78px 0; }
+    .underwater-section { position: relative; isolation: isolate; overflow: hidden; background: radial-gradient(ellipse at 76% 43%, rgba(213,31,53,.035), transparent 31%), linear-gradient(180deg, #fff 0%, #f7f7f7 48%, #fff 100%); }
+    .underwater-section::before, .underwater-section::after { position: absolute; z-index: -1; inset: -35%; border-radius: 50%; content: ""; pointer-events: none; }
+    .underwater-section::before { background: radial-gradient(ellipse at 23% 47%, rgba(213,31,53,.055), transparent 28%), radial-gradient(ellipse at 76% 42%, rgba(75,75,75,.055), transparent 26%), radial-gradient(ellipse at 49% 79%, rgba(213,31,53,.035), transparent 30%); animation: water-light-drift 18s ease-in-out infinite alternate; }
+    .underwater-section::after { inset: 0; border-radius: 0; background: repeating-radial-gradient(ellipse at 76% 18%, transparent 0 54px, rgba(60,60,60,.045) 57px 59px, transparent 62px 96px); mask-image: linear-gradient(110deg, transparent 8%, #000 48%, transparent 92%); animation: water-ripple-drift 24s linear infinite; }
+    @keyframes water-light-drift { from { transform: translate3d(-2%, -1%, 0) rotate(-4deg) scale(.96); } to { transform: translate3d(2%, 2%, 0) rotate(4deg) scale(1.04); } }
+    @keyframes water-ripple-drift { from { transform: translateX(-3%) scale(1); } to { transform: translateX(3%) scale(1.08); } }
+    .underwater-scene { position: absolute; z-index: -1; top: 50%; left: 50%; width: min(92vw, 1180px); height: 96%; overflow: visible; opacity: .72; pointer-events: none; filter: drop-shadow(0 12px 18px rgba(30,30,30,.2)); transform: translate(-50%, -50%); }
+    .underwater-scene svg { width: 100%; height: 100%; overflow: visible; }
+    .underwater-fish { transform-box: fill-box; transform-origin: center; animation: underwater-fish-swim 8s ease-in-out infinite alternate; }
+    .underwater-dart { transform-box: fill-box; transform-origin: center; animation: underwater-dart-flight 4.8s ease-in-out infinite; }
+    @keyframes underwater-fish-swim { from { transform: translate(-10px, 4px) rotate(-1deg); } to { transform: translate(12px, -6px) rotate(1deg); } }
+    @keyframes underwater-dart-flight { 0%, 8% { opacity: 0; transform: translateX(-150px); } 16% { opacity: .95; } 72% { opacity: .95; transform: translateX(20px); } 84%, 100% { opacity: 0; transform: translateX(20px); } }
+    @media (prefers-reduced-motion: reduce) { .underwater-fish, .underwater-dart { animation: none; } }
+    .underwater-content { position: relative; z-index: 1; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 28px; }
+    .section-heading .button { margin-top: 14px; }
+    .product-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+    .product-actions .button { margin-top: 0; }
+    .kicker { color: #c51c31; font-size: 12px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
+    h2 { margin: 8px 0 0; font-size: clamp(27px, 3vw, 36px); letter-spacing: -.7px; }
+    .section-intro { max-width: 430px; margin: 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .categories { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .category {
+      min-height: 185px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--white);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .underwater-section .category { background: rgba(255,255,255,.78); backdrop-filter: blur(3px); }
+    .category:hover { transform: translateY(-4px); box-shadow: 0 15px 36px rgba(0, 0, 0, .1); }
+    .category-icon { display: grid; width: 54px; height: 54px; place-items: center; border-radius: 17px; background: #f4e9ea; font-size: 28px; }
+    .category h3 { margin: 18px 0 5px; font-size: 17px; }
+    .category p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    .products-wrap { position: relative; isolation: isolate; overflow: hidden; background: linear-gradient(180deg, #f3f3f3 0%, #eeeeee 48%, #f3f3f3 100%); }
+    .products-wrap > .container { position: relative; z-index: 1; }
+    .product-fish-school { position: absolute; z-index: 0; inset: 0; overflow: hidden; pointer-events: none; }
+    .product-fish-school > svg { position: absolute; width: 0; height: 0; overflow: hidden; }
+    .school-fish { position: absolute; left: -16%; width: var(--fish-size); height: auto; color: #262626; opacity: .36; filter: drop-shadow(0 5px 5px rgba(0,0,0,.2)); animation: school-fish-drift var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
+    .school-fish svg { display: block; width: 100%; overflow: visible; }
+    .school-fish use { fill: currentColor; }
+    .school-fish--one { top: 12%; --fish-size: 154px; --fish-duration: 34s; --fish-delay: -25s; }
+    .school-fish--two { top: 31%; --fish-size: 100px; --fish-duration: 28s; --fish-delay: -17s; opacity: .3; }
+    .school-fish--two svg { transform: scaleX(-1); }
+    .school-fish--three { top: 82%; --fish-size: 128px; --fish-duration: 39s; --fish-delay: -31s; opacity: .32; }
+    .school-fish--four { top: 19%; --fish-size: 78px; --fish-duration: 31s; --fish-delay: -9s; opacity: .28; }
+    .school-fish--four svg { transform: scaleX(-1); }
+    .school-fish--five { top: 73%; --fish-size: 156px; --fish-duration: 43s; --fish-delay: -37s; opacity: .28; }
+    @keyframes school-fish-drift { 0% { transform: translate3d(-5vw, 0, 0) rotate(-2deg); } 48% { transform: translate3d(55vw, -14px, 0) rotate(2deg); } 100% { transform: translate3d(120vw, 3px, 0) rotate(-1deg); } }
+    @media (prefers-reduced-motion: reduce) { .school-fish { animation: none; left: auto; } .school-fish--one { left: 12%; } .school-fish--two { left: 34%; } .school-fish--three { left: 58%; } .school-fish--four { left: 74%; } .school-fish--five { left: 86%; } }
+    .products {
+      display: grid;
+      grid-auto-columns: calc((100% - 36px) / 3);
+      grid-auto-flow: column;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 8px 4px 18px;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: none;
+      scrollbar-color: #c51c31 #ddd;
+      scrollbar-width: thin;
+    }
+    .products::-webkit-scrollbar { height: 8px; }
+    .products::-webkit-scrollbar-thumb { border-radius: 99px; background: #c51c31; }
+    .products::-webkit-scrollbar-track { border-radius: 99px; background: #ddd; }
+    .product { position: relative; overflow: hidden; border: 1px solid #e1e1e1; border-radius: var(--radius); background: var(--white); transition: transform .24s ease, box-shadow .24s ease; transform-origin: center; }
+    .product { min-width: 0; }
+    .product:hover, .product:focus-within { z-index: 2; transform: scale(1.035); box-shadow: 0 14px 30px rgba(0,0,0,.16); }
+    .product.is-popping { animation: product-card-pop .58s ease-out; }
+    .product.is-grabbed { opacity: 0; transform: scale(.72) rotate(-5deg); }
+    @keyframes product-card-pop { 0% { scale: 1; } 42% { scale: 1.09; } 72% { scale: .98; } 100% { scale: 1.035; } }
+    .product-visual { position: relative; display: grid; height: 190px; place-items: center; background: linear-gradient(145deg, #f1f1f1, #ddd); }
+    .product-image-link { display: block; }
+    .product-photo { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .tag { position: absolute; z-index: 1; top: 14px; left: 14px; padding: 6px 10px; border-radius: 999px; background: var(--white); color: #c51c31; font-size: 11px; font-weight: 800; }
+    .product-info { padding: 18px 19px 20px; }
+    .product-info h3 { margin: 0 0 7px; font-size: 17px; }
+    .product-info p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .product-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 16px; }
+    .price { color: #c51c31; font-size: 18px; font-weight: 800; }
+    .price small { color: var(--muted); font-size: 11px; font-weight: 500; }
+    .ask-link { color: #c51c31; font-size: 13px; font-weight: 800; }
+    .ask-link:hover { color: #941326; }
+    .view-product-link { color: #c51c31; font-size: 16px; font-weight: 800; }
+    .view-product-link:hover { color: #941326; }
+
+    .about { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 56px; }
+    .about-card { position: relative; display: grid; min-height: 315px; place-items: center; overflow: hidden; border-radius: 28px; background: linear-gradient(145deg, #3b3b3b, #1b1b1b 55%, #a7192c); }
+    .about-card::before, .about-card::after { position: absolute; width: 340px; height: 135px; border: 1px solid rgba(255,255,255,.36); border-radius: 50%; content: ""; transform: rotate(-14deg); }
+    .about-card::after { width: 410px; height: 170px; }
+    .about-fish-school { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .about-fish { position: absolute; left: -34%; width: var(--fish-size); color: #fff; opacity: .94; filter: drop-shadow(0 5px 6px rgba(0,0,0,.6)); animation: about-fish-drift var(--fish-duration) ease-in-out var(--fish-delay) infinite; }
+    .about-fish svg { display: block; width: 100%; }
+    .about-fish--one { top: 19%; --fish-size: 142px; --fish-duration: 13s; --fish-delay: -6s; }
+    .about-fish--two { top: 57%; --fish-size: 92px; --fish-duration: 10s; --fish-delay: -4s; opacity: .62; }
+    .about-fish--three { top: 36%; --fish-size: 64px; --fish-duration: 16s; --fish-delay: -12s; opacity: .5; }
+    .about-fish--three svg { transform: scaleX(-1); }
+    @keyframes about-fish-drift { from { transform: translateX(-5vw) translateY(8px); } to { transform: translateX(500px) translateY(-10px); } }
+    .about-emoji { position: relative; z-index: 1; font-size: 112px; filter: drop-shadow(0 18px 12px rgba(0, 0, 0, .18)); }
+    .about-copy p { color: var(--muted); font-size: 15px; line-height: 1.9; }
+    .about-points { display: grid; grid-template-columns: 1fr 1fr; gap: 11px 18px; margin-top: 22px; }
+    .about-points span { color: #333; font-size: 13px; font-weight: 700; }
+    .about-points span::before { margin-right: 8px; color: #c51c31; content: "✓"; }
+
+    .contact-banner { padding: 42px; border-radius: 28px; background: var(--green); color: var(--white); }
+    .contact-banner.is-forest-destination { animation: forest-destination .85s ease-out; }
+    @keyframes forest-destination { 0%, 100% { box-shadow: 0 0 0 rgba(92,151,93,0); } 38% { box-shadow: 0 0 48px rgba(159,205,116,.72), inset 0 0 26px rgba(217,241,175,.2); scale: 1.025; } }
+    .forest-capture-card { position: fixed; z-index: 1000; margin: 0; pointer-events: none; transform-origin: center; box-shadow: 0 24px 60px rgba(0,0,0,.38); }
+    .forest-bite { position: fixed; z-index: 1001; width: clamp(150px, 20vw, 250px); height: clamp(123px, 16.4vw, 205px); pointer-events: none; filter: drop-shadow(0 8px 12px rgba(0,0,0,.42)); transform-origin: center; }
+    .forest-bite svg { width: 100%; height: 100%; overflow: visible; }
+    .catalog-image-dialog { z-index: 1200; margin: auto; }
+    .catalog-image-dialog { position: fixed; inset: 0; width: min(94vw, 1100px); max-width: none; max-height: 92vh; padding: 54px 18px 18px; overflow: visible; border: 1px solid rgba(255,255,255,.25); border-radius: 22px; background: rgba(18,25,24,.96); box-shadow: 0 24px 90px rgba(0,0,0,.5); }
+    .catalog-image-dialog::backdrop { background: rgba(8,17,18,.78); backdrop-filter: blur(5px); }
+    .catalog-image-dialog-photo { display: block; width: 100%; height: min(76vh, 760px); object-fit: contain; border-radius: 12px; }
+    .catalog-image-dialog-close { position: absolute; top: 8px; right: 10px; display: grid; width: 38px; height: 38px; place-items: center; border: 0; border-radius: 50%; background: #d51f35; color: white; font-size: 28px; line-height: 1; cursor: pointer; }
+    @media (prefers-reduced-motion: reduce) { .forest-canopy, .forest-dart, .forest-fish, .about-fish { animation: none; } }
+    .contact-content { display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .contact-banner h2 { margin: 0 0 9px; font-size: 29px; }
+    .contact-banner p { margin: 0; color: #ddd; font-size: 14px; }
+    .contact-details { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 22px; color: #eee; font-size: 13px; }
+    footer { padding: 27px 0; color: var(--muted); font-size: 12px; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 800px) {
+      .nav-links { gap: 16px; }
+      .nav-links a:nth-child(2) { display: none; }
+      .hero { padding: 59px 0; }
+      .hero-content { min-height: 480px; grid-template-columns: 1fr; gap: 24px; }
+      .categories { grid-template-columns: repeat(2, 1fr); }
+      .about { gap: 30px; }
+    }
+    @media (max-width: 590px) {
+      .container { width: min(100% - 30px, 460px); }
+      .topbar { font-size: 11px; }
+      .nav { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 10px; padding: 10px 0; }
+      .nav-links { grid-column: 1 / -1; gap: 20px; overflow-x: auto; padding: 4px 0 7px; white-space: nowrap; }
+      .nav-links a:nth-child(2) { display: inline; }
+      .nav-cta { min-height: 40px; padding: 0 14px; font-size: 12px; }
+      .hero { padding: 48px 0 40px; }
+      .hero-content { min-height: 470px; grid-template-columns: 1fr; }
+      .hero-content > div:first-child { padding: 16px 12px; background: linear-gradient(90deg, rgba(17,17,17,.88), rgba(17,17,17,.62)); }
+      h1 { max-width: 420px; font-size: clamp(34px, 9vw, 42px); }
+      .hero-copy { font-size: 14px; }
+      .home-gallery-link { width: clamp(80px, 23vw, 100px); height: clamp(64px, 18vw, 82px); }
+      .home-gallery-link:nth-child(1) { top: 4%; left: 4%; }
+      .home-gallery-link:nth-child(2) { top: 21%; left: 56%; }
+      .home-gallery-link:nth-child(3) { top: 36%; left: 7%; }
+      .home-gallery-link:nth-child(4) { top: 47%; right: 5%; }
+      .home-gallery-link:nth-child(5) { top: 65%; left: 22%; }
+      .home-gallery-link:nth-child(6) { top: 8%; right: 5%; }
+      .home-gallery-link:nth-child(7) { top: 31%; left: 31%; }
+      .home-gallery-link:nth-child(8) { top: 58%; left: 58%; }
+      .home-gallery-link:nth-child(9) { bottom: 4%; left: 5%; }
+      .home-gallery-link:nth-child(10) { right: 18%; bottom: 3%; }
+      .sun { right: 72px; width: 70px; height: 70px; }
+      .pond { right: 8%; width: 84%; height: 125px; }
+      .benefit-row { grid-template-columns: 1fr; padding: 12px 0; }
+      .benefit { justify-content: flex-start; padding: 10px 7px; }
+      .benefit + .benefit { border-top: 1px solid var(--line); border-left: 0; }
+      .section { padding: 57px 0; }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+      .categories { gap: 11px; }
+      .category { min-height: 163px; padding: 17px; }
+      .category h3 { margin-top: 14px; font-size: 15px; }
+      .category p { font-size: 12px; }
+      .products { grid-auto-columns: min(82%, 300px); gap: 12px; }
+      .product { border-radius: 18px; }
+      .product-visual { height: clamp(118px, 38vw, 158px); }
+      .product-info { padding: 12px; }
+      .product-info h3 { font-size: 14px; line-height: 1.45; }
+      .product-info p { display: -webkit-box; overflow: hidden; font-size: 12px; line-height: 1.55; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+      .product-bottom { align-items: flex-start; flex-direction: column; gap: 6px; margin-top: 10px; }
+      .price { font-size: 15px; }
+      .about { grid-template-columns: 1fr; gap: 27px; }
+      .about-card { min-height: 240px; }
+      .about-emoji { font-size: 90px; }
+      .contact-banner { padding: 28px 22px; }
+      .contact-content { align-items: flex-start; flex-direction: column; }
+      .contact-banner h2 { font-size: 25px; }
+      .footer-row { flex-direction: column; gap: 7px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">ธนกรฟิชชิ่ง <strong>หน้าไม้ยิงปลาและอุปกรณ์</strong> · สอบถามรายละเอียดสินค้าและการใช้งานได้</div>
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="ธนกรฟิชชิ่ง หน้าหลัก">
+        <img class="brand-mark" src="brand-logo.png" alt="">
+        <span class="brand-name">ธนกรฟิชชิ่ง<small>RIM BUENG FISHING</small></span>
+      </a>
+      <nav class="nav-links" aria-label="เมนูหลัก">
+        <a href="#categories">หมวดสินค้า</a>
+        <a href="#products">สินค้าแนะนำ</a>
+        <a href="#about">เกี่ยวกับร้าน</a>
+      </nav>
+      <a class="nav-cta" href="#contact">ติดต่อร้าน <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-art" aria-label="รูปสินค้าและวิดีโอลอยเป็นพื้นหลัง">
+        <div class="forest-backdrop" aria-hidden="true">
+          <svg viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" role="presentation">
+            <defs>
+              <linearGradient id="forest-mist" x1="0" y1="0" x2="0" y2="1">
+                <stop stop-color="#b6d5a2" stop-opacity=".3"/>
+                <stop offset="1" stop-color="#557b6b" stop-opacity=".05"/>
+              </linearGradient>
+              <linearGradient id="forest-trunk" x1="0" y1="0" x2="1" y2="0">
+                <stop stop-color="#101e1b"/>
+                <stop offset=".48" stop-color="#34463a"/>
+                <stop offset="1" stop-color="#172520"/>
+              </linearGradient>
+            </defs>
+            <rect width="1440" height="700" fill="url(#forest-mist)"/>
+            <circle cx="1030" cy="120" r="190" fill="#bfd69b" opacity=".12"/>
+            <path d="M0 465 Q190 337 365 461 T720 429 T1090 451 T1440 390 V700 H0Z" fill="#15231e" opacity=".66"/>
+            <path d="M0 531 Q210 412 434 523 T857 485 T1217 511 T1440 462 V700 H0Z" fill="#101a18" opacity=".82"/>
+            <g class="forest-canopy--far" fill="#294038" opacity=".76">
+              <path d="M82 498V130l-34 76h22l-39 83h25l-49 95h50v114z"/>
+              <path d="M235 488V74l-43 97h27l-48 93h32l-57 105h61v119z"/>
+              <path d="M396 500V121l-34 81h22l-42 86h28l-49 97h53v115z"/>
+              <path d="M593 489V54l-48 105h30l-54 98h36l-66 124h70v108z"/>
+              <path d="M793 490V115l-38 86h24l-45 91h30l-54 100h59v98z"/>
+              <path d="M1000 484V45l-49 109h31l-57 101h38l-69 132h73v97z"/>
+              <path d="M1226 493V89l-42 96h27l-50 98h33l-61 117h67v93z"/>
+              <path d="M1403 493V38l-52 113h33l-61 109h40l-74 136h78v97z"/>
+            </g>
+            <g fill="url(#forest-trunk)" opacity=".86">
+              <path d="M152 700Q178 405 157 0h48q-21 400 8 700z"/>
+              <path d="M464 700Q495 373 477 0h43q-13 366 23 700z"/>
+              <path d="M878 700Q904 383 882 0h52q-12 368 31 700z"/>
+              <path d="M1281 700Q1313 391 1285 0h47q-13 382 27 700z"/>
+            </g>
+            <g fill="#3c5844" opacity=".75">
+              <path d="M0 122Q111 12 229 98Q327 22 425 115Q518 35 618 124V184H0z"/>
+              <path d="M683 98Q795 8 900 108Q1000 22 1110 105Q1241 11 1440 101V171H683z"/>
+            </g>
+            <g fill="none" stroke="#d2e8b5" opacity=".18">
+              <path d="M715 132Q764 282 723 448" stroke-width="34"/>
+              <path d="M1110 153Q1064 310 1117 433" stroke-width="21"/>
+              <path d="M338 212Q376 313 350 416" stroke-width="14"/>
+            </g>
+            <path d="M0 599Q265 535 502 586T1008 582T1440 546V700H0Z" fill="#25433d" opacity=".43"/>
+          </svg>
+        </div>
+        <span class="forest-fish forest-fish--one" aria-hidden="true"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><path d="M106 24 127 5l22 22M108 76l20 19 21-21M88 36q12 14 0 28m18-34q13 20 0 40m18-43q14 23 0 46m21-42q12 21 0 40" stroke-linecap="round"/><circle cx="176" cy="43" r="4"/></svg></span>
+        <span class="forest-fish forest-fish--two" aria-hidden="true"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><path d="M106 24 127 5l22 22M108 76l20 19 21-21M88 36q12 14 0 28m18-34q13 20 0 40m18-43q14 23 0 46m21-42q12 21 0 40" stroke-linecap="round"/><circle cx="176" cy="43" r="4"/></svg></span>
+        <span class="forest-fish forest-fish--three" aria-hidden="true"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><path d="M106 24 127 5l22 22M108 76l20 19 21-21M88 36q12 14 0 28m18-34q13 20 0 40m18-43q14 23 0 46m21-42q12 21 0 40" stroke-linecap="round"/><circle cx="176" cy="43" r="4"/></svg></span>
+        <span class="forest-dart forest-dart--one">
+          <svg viewBox="0 0 300 48" aria-hidden="true"><path d="M5 24H262" stroke="#d8c18e" stroke-width="5"/><path d="M15 24 1 12v24z" fill="#9fb38d"/><path d="M254 24h38l-19-14m19 14-19 14" fill="none" stroke="#ead9ad" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M77 24 61 7l27 13m-11 4L61 41l27-13" fill="#b9c9a2" stroke="#60775b" stroke-width="2"/></svg>
+        </span>
+        <span class="forest-dart forest-dart--two">
+          <svg viewBox="0 0 300 48" aria-hidden="true"><path d="M5 24H262" stroke="#d8c18e" stroke-width="5"/><path d="M15 24 1 12v24z" fill="#9fb38d"/><path d="M254 24h38l-19-14m19 14-19 14" fill="none" stroke="#ead9ad" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+        <div class="sun"></div>
+        <div class="pond"></div>
+        <div class="home-gallery" id="home-gallery" aria-label="รูปสินค้า 5 รูปและวิดีโอ 5 คลิปลอยสลับกัน"></div>
+      </div>
+      <div class="container hero-content">
+        <div>
+          <span class="eyebrow">อุปกรณ์สำหรับสายหน้าไม้ยิงปลา</span>
+          <h1>หน้าไม้ยิงปลา<br>และอุปกรณ์จาก <span>ธนกรฟิชชิ่ง</span></h1>
+          <p class="hero-copy">รวมหน้าไม้ยิงปลา อะไหล่ และอุปกรณ์เสริม เลือกชมรูปสินค้าและสอบถามรายละเอียดกับทางร้านได้</p>
+          <div class="hero-actions">
+            <a class="button" href="15.html">เลือกชมสินค้าทั้งหมด <span aria-hidden="true">&nbsp;↓</span></a>
+            <a class="text-link" href="#about">รู้จักร้านเรา <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="benefits">
+      <div class="container benefit-row">
+        <div class="benefit"><span class="benefit-icon" aria-hidden="true">🏹</span><span><strong>มีหน้าไม้หลายแบบ</strong><small>เลือกชมรูปสินค้าแต่ละรุ่น</small></span></div>
+        <div class="benefit"><span class="benefit-icon" aria-hidden="true">📦</span><span><strong>มีอะไหล่และอุปกรณ์เสริม</strong><small>สอบถามสินค้าและสต็อกได้</small></span></div>
+        <div class="benefit"><span class="benefit-icon" aria-hidden="true">🤝</span><span><strong>สอบถามก่อนเลือกซื้อ</strong><small>ติดต่อร้านเพื่อขอรายละเอียด</small></span></div>
+      </div>
+    </div>
+
+    <section class="section underwater-section" id="categories">
+      <div class="underwater-scene" aria-hidden="true">
+        <svg viewBox="0 0 1200 360" role="presentation">
+          <defs>
+            <linearGradient id="water-fish-body" x1="0" y1="0" x2=".8" y2="1">
+              <stop stop-color="#d6fbf2"/>
+              <stop offset=".35" stop-color="#eee"/>
+              <stop offset=".72" stop-color="#b5162b"/>
+              <stop offset="1" stop-color="#fff"/>
+            </linearGradient>
+            <linearGradient id="water-fish-fin" x1="0" y1="0" x2="1" y2="1">
+              <stop stop-color="#fff"/>
+              <stop offset="1" stop-color="#d51f35"/>
+            </linearGradient>
+          </defs>
+          <g class="underwater-fish" stroke="#222" stroke-linejoin="round">
+            <path d="M366 180 C330 152 291 129 253 126 C273 151 280 167 281 180 C280 193 273 210 253 234 C291 231 330 208 366 180z" fill="url(#water-fish-fin)" stroke-width="8"/>
+            <path d="M350 180 C415 91 608 76 746 137 Q783 153 828 180 Q783 207 746 223 C608 284 415 269 350 180z" fill="url(#water-fish-body)" stroke-width="9"/>
+            <path d="M465 112 C492 69 548 72 596 101 C558 99 526 115 498 139z" fill="url(#water-fish-fin)" stroke-width="7"/>
+            <path d="M521 246 C555 291 607 285 647 239 C606 258 568 246 546 226z" fill="url(#water-fish-fin)" stroke-width="7"/>
+            <path d="M744 143 Q773 157 811 180 Q773 201 744 217 Q770 180 744 143z" fill="#d4f7eb" opacity=".8" stroke-width="4"/>
+            <path d="M780 183 Q804 190 824 180" fill="none" stroke="#347d8c" stroke-width="4" stroke-linecap="round"/>
+            <path d="M436 152 Q459 180 436 210 M461 147 Q485 180 461 214" fill="none" stroke="#222" stroke-width="5" opacity=".75"/>
+            <path d="M503 130 Q526 180 503 231 M550 115 Q574 180 550 246 M600 110 Q623 180 600 250 M650 122 Q671 180 650 238 M695 137 Q711 180 695 222" fill="none" stroke="#e1fff5" stroke-width="3" opacity=".5"/>
+            <circle cx="761" cy="163" r="11" fill="#f7ffff" stroke-width="4"/>
+            <circle cx="765" cy="163" r="5" fill="#173b48" stroke="none"/>
+            <path d="M794 190 Q811 193 822 180" fill="none" stroke="#222" stroke-width="4" stroke-linecap="round"/>
+            <path d="M388 178 Q354 165 329 156 M388 183 Q352 194 328 207" fill="none" stroke="#d9fbf2" stroke-width="4" opacity=".75"/>
+          </g>
+          <g class="underwater-dart" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M82 142 Q152 128 230 138" stroke="#d0f9f5" stroke-width="12" opacity=".55"/>
+            <path d="M96 151 L281 151" stroke="#264b59" stroke-width="11"/>
+            <path d="M102 147 L277 147" stroke="#efffff" stroke-width="4"/>
+            <path d="M277 151 L323 151 L301 137 M323 151 L301 165" stroke="#264b59" stroke-width="8"/>
+            <path d="M168 151 L150 132 L183 145 M168 151 L150 170 L183 157" fill="#b4e8df" stroke="#347d8c" stroke-width="4"/>
+            <circle cx="119" cy="151" r="8" fill="#d5f3e7" stroke="#347d8c" stroke-width="3"/>
+          </g>
+          <g fill="none" stroke="#d51f35" stroke-width="3" opacity=".8">
+            <ellipse cx="270" cy="82" rx="15" ry="8"/>
+            <ellipse cx="290" cy="51" rx="7" ry="4"/>
+            <ellipse cx="875" cy="293" rx="12" ry="6"/>
+            <ellipse cx="894" cy="267" rx="6" ry="3"/>
+          </g>
+        </svg>
+      </div>
+      <div class="container underwater-content">
+        <div class="section-heading">
+          <div><span class="kicker">เลือกตามการใช้งาน</span><h2>อุปกรณ์หน้าไม้ยิงปลา</h2></div>
+          <p class="section-intro">เลือกชมหน้าไม้ อะไหล่ และอุปกรณ์เสริมตามหมวดได้ที่หน้าสินค้าทั้งหมด</p>
+        </div>
+        <div class="categories">
+          <a class="category" href="15.html#spearguns"><span class="category-icon" aria-hidden="true">🏹</span><h3>หน้าไม้ยิงปลา</h3><p>ชมรูปสินค้าและสอบถามแต่ละรุ่น</p></a>
+          <a class="category" href="15.html#shafts"><span class="category-icon" aria-hidden="true">➶</span><h3>ลูกดอกและอะไหล่</h3><p>สอบถามขนาดและอะไหล่ให้ตรงรุ่น</p></a>
+          <a class="category" href="15.html#rat-spearguns"><span class="category-icon" aria-hidden="true">🎯</span><h3>หน้าไม้ยิงหนู</h3><p>ชมสินค้าและสอบถามรายละเอียดกับทางร้าน</p></a>
+          <a class="category" href="15.html#accessories"><span class="category-icon" aria-hidden="true">🎒</span><h3>อุปกรณ์เสริม</h3><p>เลือกดูของใช้และอุปกรณ์เพิ่มเติม</p></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section products-wrap" id="products">
+      <div class="product-fish-school" aria-hidden="true">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <symbol id="catalog-school-fish" viewBox="0 0 240 100">
+            <path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/>
+            <path d="M58 50 17 22l11 28-11 28 41-28Z"/>
+            <path d="M106 24 127 5l22 22M108 76l20 19 21-21" opacity=".8"/>
+            <circle cx="176" cy="43" r="3.8" fill="#f5ffff"/>
+            <path d="M198 55q12 2 19-5" fill="none" stroke="#f5ffff" stroke-width="2" opacity=".75"/>
+            <path d="M88 36q12 14 0 28m18-34q13 20 0 40m20-43q14 23 0 46m21-42q12 21 0 40m19-32q9 15 0 26" fill="none" stroke="#f5ffff" stroke-width="2" opacity=".32"/>
+          </symbol>
+        </svg>
+        <span class="school-fish school-fish--one"><svg viewBox="0 0 240 100"><use href="#catalog-school-fish"/></svg></span>
+        <span class="school-fish school-fish--two"><svg viewBox="0 0 240 100"><use href="#catalog-school-fish"/></svg></span>
+        <span class="school-fish school-fish--three"><svg viewBox="0 0 240 100"><use href="#catalog-school-fish"/></svg></span>
+        <span class="school-fish school-fish--four"><svg viewBox="0 0 240 100"><use href="#catalog-school-fish"/></svg></span>
+        <span class="school-fish school-fish--five"><svg viewBox="0 0 240 100"><use href="#catalog-school-fish"/></svg></span>
+      </div>
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="kicker">คัดมาให้แล้ว</span>
+            <h2>หน้าไม้ยิงปลาแนะนำจากร้าน</h2>
+            <div class="product-actions">
+              <a class="button" href="15.html#all-products">ดูสินค้าทั้งหมด <span aria-hidden="true">&nbsp;→</span></a>
+            </div>
+          </div>
+          <p class="section-intro">สินค้าเลื่อนแนวนอนอัตโนมัติ หยุดเมื่อชี้เมาส์หรือแตะเพื่อเลือกชม</p>
+        </div>
+        <div class="products" id="featured-products" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about">
+        <div class="about-card" aria-label="อุปกรณ์หน้าไม้ยิงปลาและปลาว่ายใต้น้ำ">
+          <div class="about-fish-school" aria-hidden="true">
+            <span class="about-fish about-fish--one"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><circle cx="176" cy="43" r="4" fill="#174d5b"/></svg></span>
+            <span class="about-fish about-fish--two"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><circle cx="176" cy="43" r="4" fill="#174d5b"/></svg></span>
+            <span class="about-fish about-fish--three"><svg viewBox="0 0 240 100"><path d="M54 50C76 17 143 12 190 39l25 11-25 11c-47 27-114 22-136-11Z"/><path d="M58 50 17 22l11 28-11 28 41-28Z"/><circle cx="176" cy="43" r="4" fill="#174d5b"/></svg></span>
+          </div>
+          <span class="about-emoji" aria-hidden="true">🏹</span>
+        </div>
+        <div class="about-copy">
+          <span class="kicker">สำหรับสายหน้าไม้ยิงปลา</span>
+          <h2>เลือกอุปกรณ์ให้เหมาะกับการใช้งาน</h2>
+          <p>ธนกรฟิชชิ่งรวบรวมหน้าไม้ยิงปลา อะไหล่ และอุปกรณ์เสริมไว้ในที่เดียว สอบถามรายละเอียด ขนาด และการใช้งานที่เหมาะสมกับทางร้านก่อนเลือกซื้อ</p>
+          <div class="about-points"><span>สอบถามรุ่นและขนาด</span><span>มีอะไหล่และอุปกรณ์เสริม</span><span>ดูรูปสินค้าก่อนเลือกซื้อ</span><span>คำนึงถึงความปลอดภัย</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="contact">
+      <div class="contact-banner">
+        <div class="contact-content">
+          <div>
+            <h2>กำลังหาอุปกรณ์หน้าไม้ยิงปลาอยู่ไหม?</h2>
+            <p>สอบถามสินค้า อะไหล่ และรายละเอียดการใช้งานกับทางร้านได้เลย</p>
+            <div class="contact-details"><span>☎ 08X-XXX-XXXX</span><span>💬 LINE: @634lfegy</span><span>📍 เปลี่ยนเป็นที่อยู่ร้านของคุณ</span></div>
+          </div>
+          <a class="button" href="https://line.me/R/ti/p/%40634lfegy" target="_blank" rel="noopener noreferrer">แชตสอบถาม <span aria-hidden="true">&nbsp;↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row"><span>© <span id="year">2026</span> ธนกรฟิชชิ่ง · หน้าไม้ยิงปลาและอุปกรณ์</span><span>เลือกใช้อุปกรณ์อย่างรับผิดชอบและคำนึงถึงความปลอดภัย</span></div>
+  </footer>
+  <script src="catalog-products.js"></script>
+  <script>
+    if (!Array.isArray(window.catalogProducts)) {
+      throw new Error("โหลดข้อมูลสินค้า catalog-products.js ไม่สำเร็จ");
+    }
+
+    const featuredProducts = document.querySelector("#featured-products");
+    const shuffledProducts = [...window.catalogProducts];
+    for (let i = shuffledProducts.length - 1; i > 0; i -= 1) {
+      const randomIndex = Math.floor(Math.random() * (i + 1));
+      [shuffledProducts[i], shuffledProducts[randomIndex]] = [shuffledProducts[randomIndex], shuffledProducts[i]];
+    }
+
+    function createProductCard(product) {
+      const article = document.createElement("article");
+      article.className = "product";
+
+      const imageLink = document.createElement("a");
+      imageLink.className = "product-visual product-image-link";
+      imageLink.href = "#contact";
+      imageLink.setAttribute("aria-label", `สอบถามเกี่ยวกับ${product.title}`);
+
+      if (product.tag) {
+        const tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = product.tag;
+        imageLink.append(tag);
+      }
+
+      const image = document.createElement("img");
+      image.className = "product-photo";
+      image.src = window.catalogImageUrl(product.image);
+      image.alt = product.alt;
+      image.loading = "lazy";
+      imageLink.append(image);
+
+      const info = document.createElement("div");
+      info.className = "product-info";
+      const title = document.createElement("h3");
+      title.textContent = product.title;
+      const description = document.createElement("p");
+      description.textContent = product.description;
+      const bottom = document.createElement("div");
+      bottom.className = "product-bottom";
+      const viewImageLink = document.createElement("a");
+      viewImageLink.className = "view-product-link";
+      viewImageLink.href = product.image;
+      viewImageLink.textContent = "ดูรูปสินค้า";
+      viewImageLink.setAttribute("aria-label", `ดูรูป${product.title}`);
+      viewImageLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.showCatalogImage(product.image, product.alt);
+      });
+      const askLink = document.createElement("a");
+      askLink.className = "ask-link";
+      askLink.href = "#contact";
+      askLink.textContent = "สอบถาม →";
+      askLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.contactProductOnLine(article, document.querySelector(".contact-banner"), product);
+      });
+
+      bottom.append(viewImageLink, askLink);
+      info.append(title, description, bottom);
+      article.append(imageLink, info);
+      article.addEventListener("click", (event) => {
+        if (event.target.closest(".product-bottom")) return;
+        const clickedLink = event.target.closest("a");
+        if (clickedLink) event.preventDefault();
+        window.contactProductOnLine(article, document.querySelector(".contact-banner"), product);
+      });
+      return article;
+    }
+
+    shuffledProducts.forEach((product) => featuredProducts.append(createProductCard(product)));
+
+    let carouselDirection = 1;
+    let carouselFrame = 0;
+    let carouselLastTime = 0;
+    let resumeTimer = 0;
+    let endPauseUntil = 0;
+    let carouselPaused = false;
+    let carouselPosition = featuredProducts.scrollLeft;
+    let carouselPointerInside = false;
+    let carouselTouchActive = false;
+    let carouselFocusWithin = false;
+    let carouselResumeAfter = 0;
+
+    function stopProductCarousel() {
+      carouselPaused = true;
+      carouselLastTime = 0;
+      window.cancelAnimationFrame(carouselFrame);
+    }
+
+    function startProductCarousel() {
+      if (
+        !carouselPaused ||
+        carouselPointerInside ||
+        carouselTouchActive ||
+        carouselFocusWithin ||
+        Date.now() < carouselResumeAfter ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) return;
+      carouselPaused = false;
+      carouselLastTime = 0;
+      carouselPosition = featuredProducts.scrollLeft;
+      carouselFrame = window.requestAnimationFrame(animateProductCarousel);
+    }
+
+    function animateProductCarousel(time) {
+      if (carouselPaused) return;
+      if (!carouselLastTime) carouselLastTime = time;
+      const elapsed = Math.min((time - carouselLastTime) / 1000, 0.05);
+      carouselLastTime = time;
+
+      const maxScroll = featuredProducts.scrollWidth - featuredProducts.clientWidth;
+      if (maxScroll > 1 && time >= endPauseUntil) {
+        carouselPosition += carouselDirection * 36 * elapsed;
+        if (carouselPosition >= maxScroll) {
+          carouselPosition = maxScroll;
+          featuredProducts.scrollLeft = maxScroll;
+          carouselDirection = -1;
+          endPauseUntil = time + 900;
+        } else if (carouselPosition <= 0) {
+          carouselPosition = 0;
+          featuredProducts.scrollLeft = 0;
+          carouselDirection = 1;
+          endPauseUntil = time + 900;
+        } else {
+          featuredProducts.scrollLeft = Math.round(carouselPosition);
+        }
+      }
+
+      carouselFrame = window.requestAnimationFrame(animateProductCarousel);
+    }
+
+    function resumeProductCarouselSoon() {
+      window.clearTimeout(resumeTimer);
+      carouselResumeAfter = Date.now() + 1400;
+      resumeTimer = window.setTimeout(startProductCarousel, 1400);
+    }
+
+    featuredProducts.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "mouse" || event.pointerType === "pen") {
+        carouselPointerInside = true;
+        window.clearTimeout(resumeTimer);
+        stopProductCarousel();
+      }
+    });
+    featuredProducts.addEventListener("pointerleave", (event) => {
+      if (event.pointerType === "mouse" || event.pointerType === "pen") {
+        carouselPointerInside = false;
+        startProductCarousel();
+      }
+    });
+    featuredProducts.addEventListener("focusin", () => {
+      carouselFocusWithin = true;
+      window.clearTimeout(resumeTimer);
+      stopProductCarousel();
+    });
+    featuredProducts.addEventListener("focusout", (event) => {
+      if (!featuredProducts.contains(event.relatedTarget)) {
+        carouselFocusWithin = false;
+        startProductCarousel();
+      }
+    });
+    featuredProducts.addEventListener("touchstart", () => {
+      carouselTouchActive = true;
+      window.clearTimeout(resumeTimer);
+      stopProductCarousel();
+    }, { passive: true });
+    featuredProducts.addEventListener("touchend", () => {
+      carouselTouchActive = false;
+      resumeProductCarouselSoon();
+    }, { passive: true });
+    featuredProducts.addEventListener("touchcancel", () => {
+      carouselTouchActive = false;
+      resumeProductCarouselSoon();
+    }, { passive: true });
+    featuredProducts.addEventListener("wheel", (event) => {
+      const wheelDistance = event.deltaY || event.deltaX;
+      const maxScroll = featuredProducts.scrollWidth - featuredProducts.clientWidth;
+      if (maxScroll > 0 && wheelDistance !== 0) {
+        const nextScrollLeft = Math.max(0, Math.min(maxScroll, featuredProducts.scrollLeft + wheelDistance));
+        if (nextScrollLeft !== featuredProducts.scrollLeft) {
+          event.preventDefault();
+          featuredProducts.scrollLeft = nextScrollLeft;
+        }
+      }
+      stopProductCarousel();
+      resumeProductCarouselSoon();
+    }, { passive: false });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopProductCarousel();
+      else startProductCarousel();
+    });
+
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      carouselPaused = true;
+      startProductCarousel();
+    }
+
+    featuredProducts.addEventListener("click", (event) => {
+      const link = event.target.closest(".product-image-link");
+      if (!link) return;
+      const card = link.closest(".product");
+      card.classList.remove("is-popping");
+      void card.offsetWidth;
+      card.classList.add("is-popping");
+      window.setTimeout(() => card.classList.remove("is-popping"), 600);
+    });
+
+    const homeGalleryMedia = [
+      // ใช้ลิงก์แชร์ Google Drive ได้ โดยตั้งสิทธิ์ไฟล์เป็น "ทุกคนที่มีลิงก์"
+      { type: "image", src: "https://files.catbox.moe/jwbvrx.jpg", alt: "รูปสินค้า 1" },
+      { type: "video", src: "https://files.catbox.moe/muvqjn.mp4", alt: "วิดีโอหน้าไม้คลิปที่ 1" },
+      { type: "image", src: "https://files.catbox.moe/q1f9an.jpg", alt: "รูปสินค้า 2" },
+      { type: "video", src: "https://files.catbox.moe/ll5g4b.mp4", alt: "วิดีโอหน้าไม้คลิปที่ 2" },
+      { type: "image", src: "https://files.catbox.moe/22gh9r.jpg", alt: "รูปสินค้า 3" },
+      { type: "video", src: "https://files.catbox.moe/nyz4ni.mp4", alt: "วิดีโอหน้าไม้คลิปที่ 3" },
+      { type: "image", src: "https://files.catbox.moe/1xrdpz.jpg", alt: "รูปสินค้า 4" },
+      { type: "video", src: "https://files.catbox.moe/br1fmw.mp4", alt: "วิดีโอหน้าไม้คลิปที่ 4" },
+      { type: "image", src: "https://files.catbox.moe/q1f9an.jpg", alt: "รูปสินค้า 5" },
+      { type: "video", src: "https://files.catbox.moe/fhoncp.mp4", alt: "วิดีโอหน้าไม้คลิปที่ 5" }
+    ];
+    const homeGallery = document.querySelector("#home-gallery");
+
+    homeGalleryMedia.forEach((media, index) => {
+      if (media.type === "image") {
+        const link = document.createElement("a");
+        link.className = "home-gallery-link";
+        link.href = media.src;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        link.setAttribute("aria-label", `เปิดภาพสินค้า ${media.alt}`);
+
+        const image = document.createElement("img");
+        image.className = "home-gallery-image";
+        image.src = window.catalogImageUrl(media.src);
+        image.alt = media.alt;
+        link.append(image);
+        homeGallery.append(link);
+        return;
+      }
+
+      if (!media.src) {
+        const placeholder = document.createElement("span");
+        placeholder.className = "home-gallery-link home-gallery-placeholder";
+        placeholder.textContent = `วางลิงก์วิดีโอ ${Math.ceil(index / 2)} ตรง src`;
+        placeholder.setAttribute("aria-label", `${media.alt} ยังไม่ได้ใส่ลิงก์`);
+        homeGallery.append(placeholder);
+        return;
+      }
+
+      const link = document.createElement("a");
+      link.className = "home-gallery-link";
+      link.href = media.src;
+      link.target = "_blank";
+      link.rel = "noopener noreferrer";
+      link.setAttribute("aria-label", `เปิด${media.alt}`);
+
+      const video = document.createElement("video");
+      video.className = "home-gallery-video";
+      video.src = window.catalogVideoUrl(media.src);
+      video.muted = true;
+      video.loop = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      video.preload = "metadata";
+      video.setAttribute("aria-label", media.alt);
+      link.append(video);
+      homeGallery.append(link);
+    });
+
+    homeGallery.addEventListener("click", (event) => {
+      const link = event.target.closest(".home-gallery-link");
+      if (!link) return;
+      link.classList.remove("is-popping");
+      void link.offsetWidth;
+      link.classList.add("is-popping");
+      window.setTimeout(() => link.classList.remove("is-popping"), 650);
+    });
+  </script>
+</body>
+</html>
