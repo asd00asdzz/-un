@@ -159,7 +159,7 @@
     .home-gallery-link:nth-child(10) { right: 5%; bottom: 6%; --drift-x: -14px; --drift-y: -12px; animation-delay: -4.6s; }
     .home-gallery-link:hover, .home-gallery-link:focus-visible { z-index: 10; opacity: 1; scale: 1.14; box-shadow: 0 12px 32px rgba(0,0,0,.55), 0 0 26px rgba(213,31,53,.5); animation-name: home-image-drift, home-frame-pop; animation-duration: 5.8s, .62s; animation-timing-function: ease-in-out, ease-out; animation-iteration-count: infinite, 1; animation-fill-mode: none, forwards; }
     .home-gallery-link.is-popping { animation-name: home-image-drift, home-frame-pop; animation-duration: 5.8s, .62s; animation-timing-function: ease-in-out, ease-out; animation-iteration-count: infinite, 1; }
-    .home-gallery-image, .home-gallery-video { display: block; width: 100%; height: 100%; border-radius: 11px; object-fit: cover; filter: drop-shadow(0 8px 8px rgba(0,0,0,.4)); }
+    .home-gallery-image, .home-gallery-video { display: block; width: 100%; height: 100%; border: 0; border-radius: 11px; object-fit: cover; filter: drop-shadow(0 8px 8px rgba(0,0,0,.4)); }
     .home-gallery-placeholder { display: grid; place-items: center; color: rgba(255,255,255,.75); font-size: 11px; text-align: center; text-shadow: 0 2px 6px #000; }
     @keyframes home-image-drift { 0%, 100% { translate: 0 0; rotate: -2deg; } 50% { translate: var(--drift-x) var(--drift-y); rotate: 2deg; } }
     @keyframes home-frame-pop { 0% { scale: 1; } 42% { scale: 1.24; } 72% { scale: .96; } 100% { scale: 1.08; } }
@@ -352,6 +352,28 @@
     .contact-banner h2 { margin: 0 0 9px; font-size: 29px; }
     .contact-banner p { margin: 0; color: #ddd; font-size: 14px; }
     .contact-details { display: flex; flex-wrap: wrap; gap: 12px 24px; margin-top: 22px; color: #eee; font-size: 13px; }
+    .contact-dialog { position: fixed; inset: 0; width: min(94vw, 650px); max-width: none; max-height: min(90vh, 820px); margin: auto; padding: 0; overflow: hidden; border: 1px solid rgba(255,255,255,.28); border-radius: 28px; background: #10252b; color: #fff; box-shadow: 0 28px 100px rgba(0,0,0,.55); }
+    .contact-dialog::backdrop { background: rgba(5,15,19,.76); backdrop-filter: blur(7px); }
+    .contact-dialog-content { position: relative; max-height: min(90vh, 820px); padding: 30px; overflow: auto; isolation: isolate; background: radial-gradient(ellipse at 82% 0%, rgba(68,177,196,.3), transparent 38%), linear-gradient(145deg, #10252b, #153c42 60%, #0d242b); }
+    .contact-dialog-content::before, .contact-dialog-content::after { position: absolute; z-index: -1; width: 280px; height: 280px; border: 1px solid rgba(131,224,228,.18); border-radius: 50%; content: ""; pointer-events: none; }
+    .contact-dialog-content::before { top: -160px; right: -65px; box-shadow: 0 0 0 28px rgba(131,224,228,.04), 0 0 0 58px rgba(131,224,228,.035); }
+    .contact-dialog-content::after { bottom: -200px; left: -110px; }
+    .contact-dialog-fish { position: absolute; z-index: -1; top: 80px; right: 26px; color: rgba(160,237,236,.24); font-size: 66px; animation: contact-fish-swim 7s ease-in-out infinite alternate; pointer-events: none; }
+    @keyframes contact-fish-swim { from { transform: translate(-16px, 8px) scaleX(1); } to { transform: translate(12px, -8px) scaleX(-1); } }
+    .contact-dialog-heading { position: relative; padding-right: 42px; }
+    .contact-dialog-heading small { color: #8de2df; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+    .contact-dialog-heading h2 { margin: 7px 0 5px; font-size: 28px; }
+    .contact-dialog-heading p { margin: 0; color: #d2e4e5; font-size: 14px; }
+    .contact-dialog-close { position: absolute; top: 20px; right: 20px; display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid rgba(255,255,255,.25); border-radius: 50%; background: rgba(255,255,255,.12); color: #fff; font-size: 26px; cursor: pointer; }
+    .contact-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; margin-top: 24px; }
+    .contact-option { display: flex; min-height: 58px; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid rgba(255,255,255,.14); border-radius: 16px; background: rgba(255,255,255,.09); color: #fff; transition: transform .2s, background .2s, border-color .2s; }
+    .contact-option:hover, .contact-option:focus-visible { transform: translateY(-2px); border-color: rgba(141,226,223,.65); background: rgba(255,255,255,.16); }
+    .contact-option-icon { display: grid; width: 36px; height: 36px; flex: 0 0 36px; place-items: center; border-radius: 12px; background: rgba(141,226,223,.18); font-size: 18px; }
+    .contact-option strong, .contact-option small { display: block; }
+    .contact-option strong { font-size: 13px; }
+    .contact-option small { margin-top: 2px; color: #c3d6d8; font-size: 12px; }
+    .contact-dialog-product { min-height: 19px; margin: 17px 0 0; color: #b8d6d7; font-size: 12px; }
+    @media (prefers-reduced-motion: reduce) { .contact-dialog-fish { animation: none; } }
     footer { padding: 27px 0; color: var(--muted); font-size: 12px; }
     .footer-row { display: flex; justify-content: space-between; gap: 20px; }
 
@@ -411,6 +433,10 @@
       .contact-banner { padding: 28px 22px; }
       .contact-content { align-items: flex-start; flex-direction: column; }
       .contact-banner h2 { font-size: 25px; }
+      .contact-dialog-content { padding: 25px 18px; }
+      .contact-dialog-heading h2 { font-size: 24px; }
+      .contact-options { grid-template-columns: 1fr; gap: 8px; margin-top: 18px; }
+      .contact-dialog-close { top: 12px; right: 12px; }
       .footer-row { flex-direction: column; gap: 7px; }
     }
   </style>
@@ -427,7 +453,7 @@
         <a href="#products">สินค้าแนะนำ</a>
         <a href="#about">เกี่ยวกับร้าน</a>
       </nav>
-      <a class="nav-cta" href="#contact">ติดต่อร้าน <span aria-hidden="true">↗</span></a>
+      <a class="nav-cta" href="#contact" data-contact-options>ติดต่อร้าน <span aria-hidden="true">↗</span></a>
     </div>
   </header>
 
@@ -630,9 +656,9 @@
           <div>
             <h2>กำลังหาอุปกรณ์หน้าไม้ยิงปลาอยู่ไหม?</h2>
             <p>สอบถามสินค้า อะไหล่ และรายละเอียดการใช้งานกับทางร้านได้เลย</p>
-            <div class="contact-details"><span>☎ 08X-XXX-XXXX</span><span>💬 LINE: @634lfegy</span><span>📍 เปลี่ยนเป็นที่อยู่ร้านของคุณ</span></div>
+            <div class="contact-details"><span>☎ โทรหาแอดมินได้ในหน้าติดต่อ</span><span>💬 LINE: @634lfegy</span></div>
           </div>
-          <a class="button" href="https://line.me/R/ti/p/%40634lfegy" target="_blank" rel="noopener noreferrer">แชตสอบถาม <span aria-hidden="true">&nbsp;↗</span></a>
+          <a class="button" href="#contact" data-contact-options>แชตสอบถาม <span aria-hidden="true">&nbsp;↗</span></a>
         </div>
       </div>
     </section>
@@ -641,6 +667,28 @@
   <footer>
     <div class="container footer-row"><span>© <span id="year">2026</span> ธนกรฟิชชิ่ง · หน้าไม้ยิงปลาและอุปกรณ์</span><span>เลือกใช้อุปกรณ์อย่างรับผิดชอบและคำนึงถึงความปลอดภัย</span></div>
   </footer>
+  <dialog class="contact-dialog" id="contact-options-dialog" aria-labelledby="contact-dialog-title">
+    <div class="contact-dialog-content">
+      <span class="contact-dialog-fish" aria-hidden="true">🐟</span>
+      <button class="contact-dialog-close" type="button" data-contact-close aria-label="ปิดหน้าต่าง">×</button>
+      <div class="contact-dialog-heading">
+        <small>RIM BUENG FISHING</small>
+        <h2 id="contact-dialog-title">ติดต่อธนกรฟิชชิ่ง</h2>
+        <p>เลือกช่องทางที่สะดวก ทีมงานพร้อมให้บริการ</p>
+      </div>
+      <div class="contact-options">
+        <a class="contact-option" href="https://www.facebook.com/share/19spwr42bH/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><span class="contact-option-icon" aria-hidden="true">f</span><span><strong>Facebook</strong><small>ส่งข้อความถึงร้าน</small></span></a>
+        <a class="contact-option" href="https://th.shp.ee/fhYQN7sw3" target="_blank" rel="noopener noreferrer"><span class="contact-option-icon" aria-hidden="true">🛍️</span><span><strong>Shopee</strong><small>เลือกชมสินค้าในร้าน</small></span></a>
+        <a class="contact-option" href="https://line.me/R/ti/p/%40634lfegy" data-line-contact target="_blank" rel="noopener noreferrer"><span class="contact-option-icon" aria-hidden="true">💬</span><span><strong>LINE</strong><small>@634lfegy</small></span></a>
+        <a class="contact-option" href="tel:0942627364"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินเจน</strong><small>094-262-7364</small></span></a>
+        <a class="contact-option" href="tel:0937263051"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินเหมย</strong><small>093-726-3051</small></span></a>
+        <a class="contact-option" href="tel:0637144801"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>โม</strong><small>063-714-4801</small></span></a>
+        <a class="contact-option" href="tel:0942710056"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินไข่มุก</strong><small>094-271-0056</small></span></a>
+        <a class="contact-option" href="tel:0629056915"><span class="contact-option-icon" aria-hidden="true">☎</span><span><strong>แอดมินเอ๊ะ</strong><small>062-905-6915</small></span></a>
+      </div>
+      <p class="contact-dialog-product">เลือกช่องทางที่สะดวกเพื่อติดต่อร้าน</p>
+    </div>
+  </dialog>
   <script src="catalog-products.js"></script>
   <script>
     if (!Array.isArray(window.catalogProducts)) {
@@ -902,16 +950,27 @@
       link.rel = "noopener noreferrer";
       link.setAttribute("aria-label", `เปิด${media.alt}`);
 
-      const video = document.createElement("video");
-      video.className = "home-gallery-video";
-      video.src = window.catalogVideoUrl(media.src);
-      video.muted = true;
-      video.loop = true;
-      video.autoplay = true;
-      video.playsInline = true;
-      video.preload = "metadata";
-      video.setAttribute("aria-label", media.alt);
-      link.append(video);
+      const mediaUrl = new URL(media.src, document.baseURI);
+      if (["drive.google.com", "docs.google.com"].includes(mediaUrl.hostname)) {
+        const videoFrame = document.createElement("iframe");
+        videoFrame.className = "home-gallery-video";
+        videoFrame.src = window.catalogVideoUrl(media.src);
+        videoFrame.title = media.alt;
+        videoFrame.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture";
+        videoFrame.setAttribute("allowfullscreen", "");
+        link.append(videoFrame);
+      } else {
+        const video = document.createElement("video");
+        video.className = "home-gallery-video";
+        video.src = window.catalogVideoUrl(media.src);
+        video.muted = true;
+        video.loop = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        video.preload = "metadata";
+        video.setAttribute("aria-label", media.alt);
+        link.append(video);
+      }
       homeGallery.append(link);
     });
 
